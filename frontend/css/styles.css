@@ -1,1 +1,141 @@
 /* Stylesheet for entire web page, please keep clean! */
+.container {
+    disply: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    min-height: 1229px;
+    width: 100%;
+    align-items: end;
+    padding: 21px 23px 0 34px;
+  }
+  @media (max-width: 991px) {
+    .container {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+  }
+  #background {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  #upper-left-icons {
+    position: relative;
+    display: flex;
+    width: 234px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: end;
+  }
+  #mute-btn-img {
+    aspect-ratio: 1.36;
+    object-fit: contain;
+    object-position: center;
+    width: 83px;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  #bootleg-kirby {
+    aspect-ratio: 1.25;
+    object-fit: contain;
+    object-position: center;
+    width: 66px;
+    overflow: hidden;
+    align-self: start;
+    margin-top: 19px;
+    max-width: 100%;
+  }
+  #grass-patch {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    margin-top: 331px;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  @media (max-width: 991px) {
+    #grass-patch {
+      max-width: 100%;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+  }
+  #logic-question {
+    color: #ff96d5;
+    -webkit-text-stroke-width: 5;
+    -webkit-text-stroke-color: #fff967;
+    margin-top: 84px;
+    flex-grow: 1;
+    flex-basis: auto;
+    font: 600 76px Inter, sans-serif;
+  }
+  @media (max-width: 991px) {
+    #logic-question {
+      font-size: 40px;
+      margin-top: 40px;
+    }
+  }
+  #sitting-kirby {
+    aspect-ratio: 1.06;
+    object-fit: contain;
+    object-position: center;
+    width: 186px;
+    overflow: hidden;
+    align-self: stretch;
+    max-width: 100%;
+  }
+  #clues-box {
+    position: relative;
+    border-radius: 40px;
+    border: 12px solid rgba(255, 252, 191, 0.83);
+    background-color: rgba(255, 166, 220, 0.71);
+    align-self: center;
+    display: flex;
+    margin-top: 88px;
+    width: 968px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 80px 25px 23px;
+  }
+  @media (max-width: 991px) {
+    #clues-box {
+      margin-top: 40px;
+      padding: 0 20px;
+    }
+  }
+  #clue-box-title {
+    color: #fff;
+    font: 400 56px Inter, sans-serif;
+  }
+  @media (max-width: 991px) {
+    #clue-box-title {
+      font-size: 40px;
+    }
+  }
+  .clue {
+    color: #fff;
+    margin-top: 27px;
+    font: 400 35px Inter, sans-serif;
+  }
+  .clue {
+    color: #fff;
+    margin-top: 32px;
+    font: 400 35px Inter, sans-serif;
+  }
+  .clue {
+    color: #fff;
+    margin-top: 29px;
+    font: 400 35px Inter, sans-serif;
+  }
+  .clue {
+    color: #fff;
+    margin-top: 28px;
+    font: 400 35px Inter, sans-serif;
+  }
