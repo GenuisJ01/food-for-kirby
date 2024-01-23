@@ -1,1 +1,61 @@
-[{}]
+[{
+    "username": "want2learn",
+    "id": "1",
+    "progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
+},
+{
+    "username": "astarmemory",
+    "id": "2",
+    "progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
+},
+{
+    "username": "student1234",
+    "id": "3",
+    "progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
+},
+{
+    "username": "futurebn",
+    "id": "4",
+    "progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
+},
+{
+    "username": "nothere09",
+    "id": "5",
+    "Progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
+}
+]
