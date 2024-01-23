@@ -17,13 +17,13 @@ app.use(logger);
 
 app.get('/', (req, res) => {
     if (profiles.length == 1 && clues.length == 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} clue to pick from!`);
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} topic to pick from!`);
     } else if (profiles.length == 1 && clues.length > 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} clues to pick from!`)
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} topics to pick from!`)
     } else if (profiles.length > 1 && clues.length == 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profiles made, and a total of ${clues.length} clue to pick from!`)
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profiles made, and a total of ${clues.length} topic to pick from!`)
     } else if (profiles.length > 1 && clues.length > 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profiles made, and a total of ${clues.length} clues to pick from!`);
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profiles made, and a total of ${clues.length} topics to pick from!`);
     } else {
         res.status(406).send(`Kirby couldn't make it work... The profiles or clues database has an error, and cannot be brought up.`)
     }
