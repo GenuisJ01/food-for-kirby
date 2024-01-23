@@ -1,14 +1,13 @@
 /* Stylesheet for entire web page, please keep clean! */
 .container {
-    disply: flex;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     display: flex;
-    min-height: 1229px;
+    min-height: 100vh;
     width: 100%;
     align-items: end;
-    padding: 21px 23px 0 34px;
   }
   @media (max-width: 991px) {
     .container {
@@ -32,6 +31,61 @@
     flex-direction: column;
     align-items: end;
   }
+  #logic-puzzle {
+    position: relative;
+    display: flex;
+    width: 234px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: start;
+  }
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 12px solid rgba(255, 252, 191, 0.83);
+    background-color: rgba(255, 166, 220, 0.71);
+    border-radius: 40px;
+    width: 968px;
+    height: 500px;
+    text-align: center;
+    z-index: 10;
+    max-width: 70%;
+  }
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 10px solid rgba(255, 252, 191, 0.83);
+  }
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .modal-body {
+    padding: 10px 15px;
+  }
+  #overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+  }
+  #overlay.active{
+    pointer-events: all;
+    opacity: 1;
+  }
   #mute-btn-img {
     aspect-ratio: 1.36;
     object-fit: contain;
@@ -49,12 +103,13 @@
     align-self: start;
     margin-top: 19px;
     max-width: 100%;
+    cursor: pointer;
   }
   #grass-patch {
     position: relative;
     align-self: stretch;
     display: flex;
-    margin-top: 331px;
+    margin-top: 430px;
     align-items: end;
     justify-content: space-between;
     gap: 20px;
@@ -96,13 +151,15 @@
     border: 12px solid rgba(255, 252, 191, 0.83);
     background-color: rgba(255, 166, 220, 0.71);
     align-self: center;
+    align-items: flex-start;
     display: flex;
-    margin-top: 88px;
+    margin-top: 50px;
     width: 968px;
     max-width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 25px 80px 25px 23px;
+    padding: 0px 80px 25px 23px;
+    max-width: 70%;
   }
   @media (max-width: 991px) {
     #clues-box {
