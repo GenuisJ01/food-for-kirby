@@ -17,6 +17,54 @@ width: auto;
   margin: 35px;
 }
 
+#introductionKirby { 
+  aspect-ratio: 1.06;
+  object-fit: contain;
+  object-position: centre;
+  background: ;
+  width: 200px;
+  overflow: hidden;
+  align-self: stretch;
+  max-width: 100%;
+  border: 2px black;
+}
+
+.column {
+  float: left;
+  width: 10.0%;
+  padding: 5px;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#heart { 
+  aspect-ratio: 1.06;
+  object-fit: contain;
+  object-position: centre;
+  background: ;
+  width: 70px;
+  overflow: hidden;
+  align-self: stretch;
+  max-width: 100%;
+  border: 2px black;
+  z-index: 100px 
+}
+
+
+.studentName{
+  position: fixed;
+  top: 200px; left: 900px; 
+  width: 600px;
+  height: 70px;
+  border-radius: 40px 40px 40px 40px;
+  background-color: white ;
+  box-shadow: 0 2px 4px 
+}
+
+
 .title {
   position: fixed;
   top: 0px; left: 70px; 
