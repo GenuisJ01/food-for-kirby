@@ -1,14 +1,13 @@
 /* Stylesheet for entire web page, please keep clean! */
 .container {
-    disply: flex;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     display: flex;
-    min-height: 1229px;
+    min-height: 100vh;
     width: 100%;
     align-items: end;
-    padding: 21px 23px 0 34px;
   }
   @media (max-width: 991px) {
     .container {
@@ -25,6 +24,14 @@
     object-position: center;
   }
   #upper-left-icons {
+    position: relative;
+    display: flex;
+    width: 234px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: end;
+  }
+  #logic-puzzle {
     position: relative;
     display: flex;
     width: 234px;
@@ -54,7 +61,7 @@
     position: relative;
     align-self: stretch;
     display: flex;
-    margin-top: 331px;
+    margin-top: 430px;
     align-items: end;
     justify-content: space-between;
     gap: 20px;
@@ -96,13 +103,14 @@
     border: 12px solid rgba(255, 252, 191, 0.83);
     background-color: rgba(255, 166, 220, 0.71);
     align-self: center;
+    align-items: flex-start;
     display: flex;
-    margin-top: 88px;
+    margin-top: 50px;
     width: 968px;
     max-width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 25px 80px 25px 23px;
+    padding: 0px 80px 25px 23px;
   }
   @media (max-width: 991px) {
     #clues-box {
