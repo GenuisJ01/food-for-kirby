@@ -1,4 +1,52 @@
 /* Stylesheet for entire web page, please keep clean! */
+.background { 
+background-size: cover;
+background-attachment: fixed;
+background-position:  center;
+height: 500px;
+width: auto;
+}
+.greetings {
+  position: fixed;
+  top: 200px; left: 70px; 
+  width: 600px;
+  height: 70px;
+  border-radius: 40px 40px 40px 40px;
+  background-color: white ;
+  font-size: 40px;
+  text-align: center;
+  color: #4b4549;
+  padding: 0px;
+  margin: 35px 
+}
+
+.title {
+  position: fixed;
+  top: 0px; left: 70px; 
+  width: 600px;
+  height: 50px;
+  border: ;
+  background-color: ;
+  font-size: 40px;
+  text-align: center;
+  -webkit-text-stroke: 3px #FFF967;
+  color: #FF96D5;
+  padding: 0px;
+  margin: 35px 
+}
+
+
+
+.overlay {
+  position: fixed;
+  width: 1800px;
+  height: 900px;
+  border: 1px solid rgb(226, 189, 200, 0.7);
+  background-color: rgb(226, 189, 200, 0.7);
+  padding: 0px;
+  margin: 35px;
+  
+}
 .container {
     display: flex;
     flex-direction: column;
