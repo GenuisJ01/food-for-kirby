@@ -49,7 +49,7 @@
 {
     "username": "nothere09",
     "id": "5",
-    "Progress": {
+    "progress": {
         "rome": 0,
         "renaissance": 0,
         "ww1": 0,
@@ -61,7 +61,7 @@
 {
     "username": "helloworld",
     "id": "6",
-    "Progress": {
+    "progress": {
         "rome": 0,
         "renaissance": 0,
         "ww1": 0,
