@@ -1,1 +1,1 @@
-// Has main getter, poster and other required backend server functions. Should export to app.js
+// Runs the app and listens to any packages in port
