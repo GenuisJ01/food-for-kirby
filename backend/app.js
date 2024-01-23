@@ -35,6 +35,45 @@ app.post('/profiles',(req,res)=>{
     res.status(201).send(profile)
 })
 
+app.patch('/profiles/', (req, res) => {
+    const changes = req.body;
+    if (changes.id < profiles.length) {
+        const originalProfile = profiles.find((profile) => profile.id == changes.id);
+
+        let changedProfile = originalProfile;
+        if (changes.name != originalProfile.name) {
+            changedProfile.name = changes.name;
+        } 
+        if (changes.progress.lives != originalProfile.progress.lives) {
+            changedProfile.progress.lives = changes.progress.lives;
+        } 
+        if (changes.progress.rome != originalProfile.progress.rome) {
+            changedProfile.progress.rome = changes.progress.rome;
+        } 
+        if (changes.progress.renaissance != originalProfile.progress.renaissance) {
+            changedProfile.progress.renaissance = changes.progress.renaissance;
+        } 
+        if (changes.progress.ww1 != originalProfile.progress.ww1) {
+            changedProfile.progress.ww1 = changes.progress.ww1;
+        } 
+        if (changes.progress.ww2 != originalProfile.progress.ww2) {
+            changedProfile.progress.ww2 = changes.progress.ww2;
+        } 
+        if (changes.progress.medicine != originalProfile.progress.medicine) {
+            changedProfile.progress.medicine = changes.progress.medicine;
+        }
+
+        for (let i = 0; i < profiles.length; i++) {
+            if (profiles[i].id == changes.id) {
+                profiles[i] = changedProfile;
+            }
+        }
+        res.status(202).send(changedProfile);
+    } else {
+        res.status(404).send("The profile by that id does not exist!");
+    }
+})
+
 app.get('/profiles',(req,res)=>{
     res.send(profiles)
 })
