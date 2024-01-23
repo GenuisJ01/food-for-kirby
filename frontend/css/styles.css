@@ -1,4 +1,14 @@
 /* Stylesheet for entire web page, please keep clean! */
+
+.box {
+  position: relative;
+  width: 1800px;
+  height: 900px;
+  border: 1px solid rgb(226, 189, 200, 0.7);
+  background-color: rgb(226, 189, 200, 0.7);
+  padding: 0px;
+  margin: 35px;
+}
 .container {
     disply: flex;
     flex-direction: column;
