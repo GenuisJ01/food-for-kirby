@@ -57,5 +57,17 @@
         "medicine": 0,
         "lives": 3
     }
+}, 
+{
+    "username": "helloworld",
+    "id": "6",
+    "Progress": {
+        "rome": 0,
+        "renaissance": 0,
+        "ww1": 0,
+        "ww2": 0,
+        "medicine": 0,
+        "lives": 3
+    }
 }
 ]
