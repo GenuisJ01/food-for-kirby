@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../javascript/index.js" defer></script>
     <title>Food For Kirby</title>
 </head>
 <body>
@@ -20,15 +21,28 @@
             srcset="../assets/yellow-muteyellow-mute32.png"
             id="mute-btn-img"
           />
-          <img
-            loading="lazy"
-            srcset="../assets/realKirbmykirby.png"
-            id="bootleg-kirby"
-          />
+          
         </div>
         <div id="logic-puzzle">
-            
+            <div id="multiple-choice">
+                <!-- <img id="answerOne" class="correctAnswer" src="../assets/realKirbmyKirby.png" onclick="correctAnswer()"> -->
+                <button data-modal-target="#modal"><img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" /></button>
+                <div class="modal" id="modal">
+                    <div class="modal-header">
+                        <div class="modal-title">Question?...</div>
+                        <button data-close-button class="close-btn">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="multi-choice-answers">Answer one...</div>
+                        <div class="multi-choice-answers">Answer one...</div>
+                        <div class="multi-choice-answers">Answer one...</div>
+                        <div class="multi-choice-answers">Answer one...</div>
+
+                    </div>
+                </div>
+            </div>
         </div>
+        <div id="overlay"></div>
         <div id="grass-patch">
           <div id="logic-question">Question</div>
           <img
