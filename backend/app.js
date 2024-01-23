@@ -29,4 +29,24 @@ app.get('/', (req, res) => {
     }
 })
 
+app.post('/profiles',(req,res)=>{
+    const profile=req.body;
+    profiles.push(profile)
+    res.status(201).send(profile)
+})
+
+app.get('/profiles',(req,res)=>{
+    res.send(profiles)
+})
+
+app.get('/profiles/:id',(req,res)=>{
+    const id = req.params.id;
+    const profile = profiles.find((profile) => profile.id == id);
+    if (profile==undefined){
+        res.status(404).send("This user ID does not exist.");
+    } else {
+        res.send(profile);
+    }
+});
+
 module.exports = {app, port};
