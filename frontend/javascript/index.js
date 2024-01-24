@@ -38,6 +38,12 @@ function drop(event) {
     };
     event.target.appendChild(draggedAnswer);
 
+    let originalList = document.getElementById('multi-choice-container');
+    let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
+    if (originalAnswer) {
+        originalAnswer.remove();
+    }
+
     checkOrder();
 }
 
