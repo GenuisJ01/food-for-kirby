@@ -137,3 +137,28 @@ function showPopUp() {
 
     closeModal(modal)
   }
+
+  async function generateRandomClues(numClues) {
+    try {
+        // Fetch the JSON file asynchronously
+        const response = await fetch('clues.json')
+        const cluesObject = await response.json()
+        //extract values from the clues.json object
+        const clues = Object.values(cluesObject)
+
+        const randomClues = []
+
+        for (let i = 0; i < numClues; i++) {
+            // Get a random index from the clues array
+            const randomIndex = Math.floor(Math.random() * clues.length)
+            // Push the randomly selected event to the randomClues array
+            randomClues.push(clues[randomIndex])
+        }
+        return randomClues
+    } catch (error) {
+        console.error('Error fetching JSON file', error)
+        throw error
+    }
+}
+generateRandomClues(4)
+    
