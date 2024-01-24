@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../javascript/index.js" defer></script>
+
     <link rel="stylesheet" href="../css/styles.css">
     <title>Food For Kirby</title>
 </head>
@@ -15,32 +18,36 @@
 
             <div class="container">
                 <div class="column">
-                    <img srcset="../assets/WalkingKirby.png" alt="heart" style="width:50%" id="introductionKirby">
+                    <img srcset="../assets/WalkingKirby.png" alt="walkingKirby" style="width:50%" id="introductionKirby">
                   </div>
                 </div>
-                <div class="column">
+                <!-- <div class="column">
                   <img srcset="../assets/heart.png" alt="introKirby" style="width:50px" id="heart"> 
-                </div>
-                <div>
-                <button class ="button8" id="helpfulKirby"> <img srcset="../assets/informativeKirby.png" alt="helpfulKirby" style="width:90px; height: 90px" background = "inherit"  > </button>
-                </div>
-
-            
-    
+                </div> -->
+                <!-- <button class ="button8" id="helpfulKirby"> <img srcset="../assets/informativeKirby.png" alt="helpfulKirby" style="width:90px; height: 90px" background = "inherit"  > </button> -->
 
             <div class = "studentName"> <p>student name</p> </div>
-            <button class ="button7" id="topicsCovered" onclick="openPopup()"> Topics Covered here!</button>
+            <button class ="button7" id="topicsCovered" .onclick="openPopup()"> Topics Covered here!</button>
+
             <div class = "box"> </div>
                 <div class = "title"> <h1>Food For Kirby</h1>  </div>
+
                 <div class = "greetings"> <p>Hello Saviour of the New World!</p> </div>
+
+                <div class = "fact"> <p>Fact of the day!</p><p1>Ancient Rome started only a few decades after Jesus was born!</p1> </div>
+
+                <button class ="button9" id="helpbtn"> Click here To Learn How to Help!</button>
+
                 <div class = "whatTopic"> <p>What topic do you want to feed Kirby today? </p> </div>
+
                 <div class = "topicsList"> 
                 <button class ="button1" id="ancientRome"> 🏛️ Ancient Rome</button>
                 <button class ="button2" id="Renaissance"> ⚔️ Renaissance</button>
                 <button class ="button3" id="WorldWarI"> 🪖 World War I</button>
                 <button class ="button4" id="WorldWarII"> 🪖 World War II</button>
                 <button class ="button5" id="Medicine"> ⚕️ Medicine</button>
-                </div>     
+                </div> 
+                    
                 <button class ="button6" id="startgame"> Let the feast begin!</button> 
                 
                 <div class = "topicsCount" id="topicsPopUp"> 
@@ -54,7 +61,7 @@
                     <div class="topicsScore__World WarI"> 0</div>
                     <div class="topicsName__Medicine"> Medicine</div>
                     <div class="topicsScore__Medicine"> 0</div>
-                    <button class ="button8" id="OK" onclick=" close()"> OK</button>        
+                    <button class ="button8" id="OK" .onclick="closePopup()"> OK</button>        
                     </div>
                 
              </div>

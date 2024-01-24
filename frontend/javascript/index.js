@@ -2,13 +2,13 @@
 
 const popup = document.getElementById("topicsPopUp");
 
-function openPopUp(){
-    topicsPopUp.classlist.add("open-popup");
+
+function openPopup(){
+    popup.classlist.add("open-popup");
 }
 
-function closePopUp(){
-    topicsPopUp.classlist.remove("open-popup");
+function closePopup(){
+    popup.classlist.remove("open-popup");
 }
 
-console.log(closePopUp)
-console.log(openPopUp)
+
