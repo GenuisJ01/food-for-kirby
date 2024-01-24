@@ -10,14 +10,42 @@
 
 <body>
     <div>
-        <img class = "background" id = "background" srcset="../assets/background.png" width="auto" height ="auto"> 
+        <img class = "background" id = "background" srcset="../assets/background.png"  alt= "" width="auto" height ="auto"> 
         <div class = "overlay">
+
+            <div class="row">
+                <div class="column">
+                  <img srcset="../assets/heart.png" alt="introKirby" style="width:100%" id="heart">
+                </div>
+                <div class="column">
+                  <img srcset="../assets/WalkingKirby.png" alt="heart" style="width:100%" id="introductionKirby">
+                </div>
+              </div>
+    
+
+         <!----   <div><img
+                loading="lazy"
+                srcset="../assets/WalkingKirby.png"
+                class ="introductionKirby"/> 
+                <img
+                loading="lazy"
+                srcset="../assets/heart.png"
+                class ="heart"/> 
+            </div> --->
+            <div class = "studentName"> <p>student name</p> </div>
             <div class = "box"> </div>
                 <div class = "title"> <h1>Food For Kirby</h1>  </div>
                 <div class = "greetings"> <p>Hello Saviour of the New World!</p> </div>
+                <div class = "whatTopic"> <p>What topic do you want to feed Kirby today? </p> </div>
+                <div class = "topicsList"> 
+                <button class ="button1" id="ancientRome"> 🏛️ Ancient Rome</button>
+                <button class ="button2" id="Renaissance"> ⚔️ Renaissance</button>
+                <button class ="button3" id="WorldWarI"> 🪖 World War I</button>
+                <button class ="button4" id="WorldWarII"> 🪖 World War II</button>
+                <button class ="button5" id="Medicine"> ⚕️ Medicine</button>
+                </div>     
+                <button class ="button6" id="Medicine"> Let the feast begin!</button>     
              </div>
-
-
             </div>
     </div>
 </body>
