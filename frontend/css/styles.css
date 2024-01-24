@@ -305,16 +305,13 @@ width: auto;
     flex-direction: column;
     align-items: end;
   }
-  #logic-puzzle {
+  #game {
     position: relative;
     display: flex;
     width: 234px;
     max-width: 100%;
     flex-direction: column;
     align-items: start;
-  }
-  #logic-puzzle.inactive{
-    transform: scale(0)
   }
   .modal {
     position: fixed;
@@ -403,6 +400,17 @@ width: auto;
     margin-top: 19px;
     max-width: 100%;
     cursor: pointer;
+  }
+  #logic-puzzle {
+    position: relative;
+    display: flex;
+    width: 234px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: start;
+  }
+  #logic-puzzle.inactive{
+    transform: scale(0)
   }
   #grass-patch {
     position: relative;

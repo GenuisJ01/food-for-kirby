@@ -3,17 +3,37 @@ const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
 const logicQuestion = document.getElementById('logic-question')
-const cluesBox =document.getElementById('clues-box')
+const cluesBox = document.getElementById('clues-box')
+const clueTitle = document.getElementById('clue-box-title')
+const clue1 = document.getElementById('clue1')
+const clue2 = document.getElementById('clue2')
+const clue3 = document.getElementById('clue3')
+const clue4 = document.getElementById('clue4')
 
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
     logicPuzzle.classList.add('inactive')
+    logicQuestion.classList.add('inactive')
+    cluesBox.classList.add('inactive')
+    clueTitle.classList.add('inactive')
+    clue1.classList.add('inactive')
+    clue2.classList.add('inactive')
+    clue3.classList.add('inactive')
+    clue4.classList.add('inactive')
 }
 
 function closeModal(modal) {
     modal.classList.remove('active')
     overlay.classList.remove('active')
+    logicPuzzle.classList.remove('inactive')
+    logicQuestion.classList.remove('inactive')
+    cluesBox.classList.remove('inactive')
+    clueTitle.classList.remove('inactive')
+    clue1.classList.remove('inactive')
+    clue2.classList.remove('inactive')
+    clue3.classList.remove('inactive')
+    clue4.classList.remove('inactive')
 }
 
 overlay.addEventListener('click', () => {
