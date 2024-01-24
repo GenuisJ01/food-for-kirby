@@ -1,10 +1,14 @@
 // Main javascript file for all behaviour in index.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const overlay = document.getElementById('overlay')
+const logicPuzzle = document.getElementById('logic-puzzle')
+const logicQuestion = document.getElementById('logic-question')
+const cluesBox =document.getElementById('clues-box')
 
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
+    logicPuzzle.classList.add('inactive')
 }
 
 function closeModal(modal) {
@@ -62,6 +66,7 @@ function checkOrder() {
 
     if (arraysEqual(currentOrder, correctOrder)) {
         alert("Congrats!!, You've arrenged the events in the correct order")
+        correctAnswer()
     }
 }
 
@@ -80,4 +85,9 @@ function arraysEqual(arrOne, arrTwo) {
 
 function allowDrop(event) {
     event.preventDefault()
+}
+
+function correctAnswer() {
+    closeModal(modal)
+
 }
