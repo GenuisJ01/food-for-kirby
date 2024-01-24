@@ -41,3 +41,7 @@ function drop(event) {
       checkOrder()
 }
 
+function drag(event) {
+    event.dataTransfer.setData('text', event.target.innerText)
+}
+
