@@ -24,6 +24,7 @@ function openModal(modal) {
     clue4.classList.add('inactive')
 }
 
+//removes the modal and overlay and brings back all other elements
 function closeModal(modal) {
     modal.classList.remove('active')
     overlay.classList.remove('active')
@@ -37,6 +38,7 @@ function closeModal(modal) {
     clue4.classList.remove('inactive')
 }
 
+//adds overlay to the background when modal button is clicked
 overlay.addEventListener('click', () => {
     const modals = document.querySelectorAll('.modal.active') 
     modals.forEach(modal => {
@@ -44,6 +46,7 @@ overlay.addEventListener('click', () => {
     })
 })
 
+//will open whatever modal is attached to that button
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -106,6 +109,8 @@ function checkOrder() {
     console.log("Correct Order:", correctOrder);
     if (arraysEqual(currentOrder, correctOrder)) {
         showPopUp()
+    } else if(arraysHalfEqual(currentOrder, correctOrder)) {
+        showPopUp()
     }
 }
 
@@ -118,6 +123,19 @@ function arraysEqual(arrOne, arrTwo) {
                 return false
             }
         }
+    return true
+}
+
+function arraysHalfEqual(arr1, arr2) {
+    const minLength = Math.min(arr1.length, arr2.length)
+    const halfLength = Math.ceil(minLength / 2)
+
+    for (let i = 0; i < halfLength; i++) {
+        if (arr1[i] !== arr2[i]) {
+         return false   
+        }
+        
+    }
     return true
 }
 
@@ -161,4 +179,3 @@ function showPopUp() {
     }
 }
 generateRandomClues(4)
-    
