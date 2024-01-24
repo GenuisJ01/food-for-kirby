@@ -9,7 +9,7 @@ width: auto;
 
 .overlay {
   position: fixed;
-  width: 1800px;
+  width: 1800px; 
   height: 900px;
   border: 1px solid rgb(226, 189, 200, 0.7);
   background-color: rgb(226, 189, 200, 0.7);
@@ -305,7 +305,7 @@ width: auto;
     flex-direction: column;
     align-items: end;
   }
-  #logic-puzzle {
+  #game {
     position: relative;
     display: flex;
     width: 234px;
@@ -341,9 +341,31 @@ width: auto;
   .modal-title {
     font-size: 1.25rem;
     font-weight: bold;
+    color: #fff;
   }
   .modal-body {
     padding: 10px 15px;
+  }
+  #multiple-choice-container {
+    width: 80%;
+    margin: auto;
+  }
+  #answer-list {
+    min-height: 100px;
+    border: 8px solid rgba(255, 252, 191, 0.83);
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 40px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .multi-choice-answers {
+    padding: 10px;
+    margin: 5px;
+    border: 5px solid rgba(255, 252, 191, 0.83);
+    cursor: move;
+    border-radius: 40px;
+    color: #fff;
   }
   #overlay {
     position: fixed;
@@ -379,6 +401,44 @@ width: auto;
     max-width: 100%;
     cursor: pointer;
   }
+  #logic-puzzle {
+    position: absolute;
+    right: 54%;
+    top: 1%;
+    display: flex;
+    width: 32.8%;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: start;
+    border: 4px solid #FFF967;
+    border-radius: 3%;
+  }
+  .grid-container {
+    display: grid;
+    width: 96%;
+    height: 96%;
+    grid-template-columns: 160px 70px 70px 70px 70px 70px 70px;
+    grid-template-rows: 160px 70px 70px 70px 70px 70px 70px;
+    background-color:rgba(255, 166, 220, 0.71);
+    padding: 2%;
+    border-radius: 3%;
+  }
+  .grid-item {
+    background-color:rgba(255, 166, 220, 0.8);
+    border: 4px solid #FFF967;
+    padding: 2%;
+    text-align: center;
+  }
+  #inactive-grid {
+    border: none;
+    background-color: transparent;
+  }
+  #depth {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #logic-puzzle.inactive{
+    transform: scale(0)
+  }
   #grass-patch {
     position: relative;
     align-self: stretch;
@@ -397,12 +457,14 @@ width: auto;
   }
   #logic-question {
     color: #ff96d5;
-    -webkit-text-stroke-width: 5;
-    -webkit-text-stroke-color: #fff967;
+    -webkit-text-stroke: 4px #fff967;
     margin-top: 84px;
     flex-grow: 1;
     flex-basis: auto;
     font: 600 76px Inter, sans-serif;
+  }
+  #logic-question.inactive{
+    transform: scale(0)
   }
   @media (max-width: 991px) {
     #logic-question {
@@ -441,6 +503,9 @@ width: auto;
       padding: 0 20px;
     }
   }
+  #clues-box.inactive{
+    transform: scale(0)
+  }
   #clue-box-title {
     color: #fff;
     font: 400 56px Inter, sans-serif;
@@ -450,23 +515,38 @@ width: auto;
       font-size: 40px;
     }
   }
-  .clue {
+  #clue-box-title.inactive{
+    transform: scale(0)
+  }
+  #clue1 {
     color: #fff;
     margin-top: 27px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue2 {
     color: #fff;
     margin-top: 32px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue3 {
     color: #fff;
     margin-top: 29px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue4 {
     color: #fff;
     margin-top: 28px;
     font: 400 35px Inter, sans-serif;
+  }
+  #clue1.inactive{
+    transform: scale(0)
+  }
+  #clue2.inactive{
+    transform: scale(0)
+  }
+  #clue3.inactive{
+    transform: scale(0)
+  }
+  #clue4.inactive{
+    transform: scale(0)
   }
