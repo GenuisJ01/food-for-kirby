@@ -10,6 +10,25 @@ const clue1 = document.getElementById('clue1')
 const clue2 = document.getElementById('clue2')
 const clue3 = document.getElementById('clue3')
 const clue4 = document.getElementById('clue4')
+const header1a = document.getElementById('h1a');
+const header1b = document.getElementById('h1b');
+const header1c = document.getElementById('h1c');
+const header2a = document.getElementById('h2a');
+const header2b = document.getElementById('h2b');
+const header2c = document.getElementById('h2c');
+const header3a = document.getElementById('h3a');
+const header3b = document.getElementById('h3b');
+const header3c = document.getElementById('h3c');
+const header4a = document.getElementById('h4a');
+const header4b = document.getElementById('h4b');
+const header4c = document.getElementById('h4c');
+let question = "";
+let headers = [];
+let excerpts = [];
+let clues = [];
+let questions = [];
+let answers = [];
+let reasons = [];
 
 function openModal(modal) {
     modal.classList.add('active')
@@ -136,4 +155,16 @@ function showPopUp() {
     });
 
     closeModal(modal)
+  }
+
+  async function getAllData() {
+    const response = await fetch("http://localhost:3000/clues/1")
+    const information = await response.json();
+    question = information.question;
+    clues.push(information.clue1, information.clue2, information.clue3);
+    excerpts.push(information.excerpt1, information.excerpt2, information.excerpt3);
+    questions.push(information.question1, information.question2, information.question3);
+    answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
+    reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
+    headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
   }
