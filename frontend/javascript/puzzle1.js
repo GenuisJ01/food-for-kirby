@@ -110,7 +110,7 @@ function checkOrder() {
     if (arraysEqual(currentOrder, correctOrder)) {
         showPopUp()
     } else if(arraysHalfEqual(currentOrder, correctOrder)) {
-        showPopUp()
+        showPopUpHalf()
     }
 }
 
@@ -127,8 +127,16 @@ function arraysEqual(arrOne, arrTwo) {
 }
 
 function arraysHalfEqual(arr1, arr2) {
-    const minLength = Math.min(arr1.length, arr2.length)
+    const minLength = arr1.length
     const halfLength = Math.ceil(minLength / 2)
+
+    while (arr1.length !== arr2.length) {
+        if (arr1.length < arr2.length) {
+            arr1.push(null); // Placeholder for missing values
+        } else {
+            arr2.push(null); // Placeholder for missing values
+        }
+    }
 
     for (let i = 0; i < halfLength; i++) {
         if (arr1[i] !== arr2[i]) {
@@ -156,26 +164,14 @@ function showPopUp() {
     closeModal(modal)
   }
 
-  async function generateRandomClues(numClues) {
-    try {
-        // Fetch the JSON file asynchronously
-        const response = await fetch('clues.json')
-        const cluesObject = await response.json()
-        //extract values from the clues.json object
-        const clues = Object.values(cluesObject)
+  function showPopUpHalf() {
+    let popup = document.getElementById('popup-half');
+    popup.show();
 
-        const randomClues = []
+    let closePopupButton = document.getElementById('closePopup-half');
+    closePopupButton.addEventListener('click', function () {
+      popup.close();
+    });
 
-        for (let i = 0; i < numClues; i++) {
-            // Get a random index from the clues array
-            const randomIndex = Math.floor(Math.random() * clues.length)
-            // Push the randomly selected event to the randomClues array
-            randomClues.push(clues[randomIndex])
-        }
-        return randomClues
-    } catch (error) {
-        console.error('Error fetching JSON file', error)
-        throw error
-    }
-}
-generateRandomClues(4)
+    closeModal(modal)
+  }
