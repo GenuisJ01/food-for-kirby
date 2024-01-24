@@ -26,5 +26,18 @@ openModalButtons.forEach(button => {
     })
 })
 
+function drop(event) {
+    event.preventDefault()
+    let data = event.dataTransfer.getData('text')
+    let draggedEvent = document.createElement('div')
+    draggedEvent.className = 'event'
+    draggedEvent.innerText = data
+    draggedEvent.draggable = true
+    draggedEvent.ondragstart = function (event) {
+        drag(event);
+      };
+      event.target.appendChild(draggedEvent)
 
+      checkOrder()
+}
 
