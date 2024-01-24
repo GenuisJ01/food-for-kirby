@@ -523,11 +523,11 @@ width: auto;
   }
   #logic-question {
     color: #ff96d5;
-    -webkit-text-stroke: 4px #fff967;
-    margin-top: 84px;
+    -webkit-text-stroke: 2px #fff967;
+    margin-top: 300px;
     flex-grow: 1;
     flex-basis: auto;
-    font: 600 76px Inter, sans-serif;
+    font: 600 40px Inter, sans-serif;
   }
   #logic-question.inactive{
     transform: scale(0)

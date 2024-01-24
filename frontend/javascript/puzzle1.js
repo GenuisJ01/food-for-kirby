@@ -32,7 +32,7 @@ let questions = [];
 let answers = [];
 let reasons = [];
 
-updateAllHeaders();
+updateAll();
 
 function openModal(modal) {
     modal.classList.add('active')
@@ -212,7 +212,7 @@ async function getAllData() {
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
 
-async function updateAllHeaders() {
+async function updateAll() {
     await getAllData();
     header1a.textContent = headers[0];
     header1b.textContent = headers[1];
@@ -226,6 +226,12 @@ async function updateAllHeaders() {
     header4a.textContent = headers[9];
     header4b.textContent = headers[10];
     header4c.textContent = headers[11];
+    
+    clue1.textContent = clues[0];
+    clue2.textContent = clues[1];
+    clue3.textContent = clues[2];
+
+    logicQuestion.textContent = question;
 }
 
 for (let i of cleaned_grid) {
