@@ -155,9 +155,9 @@ function showPopUp() {
     });
 
     closeModal(modal)
-  }
+}
 
-  async function getAllData() {
+async function getAllData() {
     const response = await fetch("http://localhost:3000/clues/1")
     const information = await response.json();
     question = information.question;
@@ -167,4 +167,4 @@ function showPopUp() {
     answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
     reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
-  }
+}
