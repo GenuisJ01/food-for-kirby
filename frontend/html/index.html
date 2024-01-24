@@ -36,7 +36,7 @@
 
                 <div class = "fact"> <p>Fact of the day!</p><p1>Ancient Rome started only a few decades after Jesus was born!</p1> </div>
 
-                <button class ="button9" id="helpbtn"> Click here To Learn How to Help!</button>
+                <button class ="button9" id="helpbtn" .onclick = "openPopup2()"> Click here To Learn How to Help!</button>
 
                 <div class = "whatTopic"> <p>What topic do you want to feed Kirby today? </p> </div>
 
@@ -47,7 +47,7 @@
                 <button class ="button4" id="WorldWarII"> 🪖 World War II</button>
                 <button class ="button5" id="Medicine"> ⚕️ Medicine</button>
                 </div> 
-                    
+
                 <button class ="button6" id="startgame"> Let the feast begin!</button> 
                 
                 <div class = "topicsCount" id="topicsPopUp"> 
@@ -62,6 +62,20 @@
                     <div class="topicsName__Medicine"> Medicine</div>
                     <div class="topicsScore__Medicine"> 0</div>
                     <button class ="button8" id="OK" .onclick="closePopup()"> OK</button>        
+                    </div>
+
+                    <div class="instructions" id="instructions"> 
+                        <p> Glad you will help!
+
+                            King Dedede is back and we need to stop him! By finishing these puzzles, you can feed me the power I need to slow him down!
+                            
+                            You will have a number of clues that will help you work out the grid. If you know that two things are related, you can tick where they intersect. If you know that they are not related, you put a cross! Each box of 9 squares is a separate box, and in those boxes each row and column can only have one tick
+                            
+                            Using the textbook, you can work out who and what the clues are about, and when you tick the right place, you will get a bonus question! If you get it right, I will be able to help out! </p>
+
+                            <button class ="button10" id="ready" .onclick="closePopup2()"> Ready!</button>        
+                        </div>
+
                     </div>
                 
              </div>

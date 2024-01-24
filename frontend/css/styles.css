@@ -187,7 +187,7 @@ width: auto;
  width: 400px ;
  transform: translate(-50%, -50%) scale(1);
  visibility: hidden;
- animation: transform 0.4s, top 0.4s;
+ transform: transform 0.4s, top 0.4s;
  
 }
 
@@ -214,6 +214,45 @@ width: auto;
   top: 50%;
   transform: translate(-50%, -50%) scale(1.5);
 }
+
+.instructions {
+  position: absolute;
+  z-index: 999;
+  top: 600px; left: 1700px; 
+  background-color: #FDB9CD;
+  border-radius: 40px 40px 40px 40px;
+  font-size: 35px;
+  text-align: center; 
+  color: #4b4549;
+  width: 900px;
+  height: 900px;
+  transform: translate(-50%, -50%) scale(1);
+  visibility: visible;
+  transform: transform 0.4s, top 0.4s;
+}
+
+.instructions button {
+  width: 100%;
+  margin-top:10px;
+  margin-left:100px;
+  border:0;
+  font-size: 25px;
+  background-color: white(226, 189, 200, 0.7);
+  border: 3px solid #4b4549;
+  color: #4b4549;
+  width: 200px ;
+  height: 50px;
+  cursor: pointer;
+ }
+
+ .open-popup2{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+} 
+
+
+
 
 .button1 {
   position: fixed;
