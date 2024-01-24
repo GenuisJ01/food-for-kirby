@@ -26,23 +26,23 @@ openModalButtons.forEach(button => {
     })
 })
 
-function drop(answer) {
-    answer.preventDefault()
-    let data = answer.dataTransfer.getData('text')
-    let draggedAnswer = document.createElement('div')
-    draggedAnswer.className = 'multi-choice-answers'
-    draggedAnswer.innerText = data
-    draggedAnswer.draggable = true
-    draggedAnswer.ondragstart = function (answer) {
-        drag(answer);
-      };
-      answer.target.appendChild(draggedAnswer)
+function drop(event) {
+    event.preventDefault();
+    let data = event.dataTransfer.getData('text');
+    let draggedAnswer = document.createElement('div');
+    draggedAnswer.className = 'multi-choice-answers';
+    draggedAnswer.innerText = data;
+    draggedAnswer.draggable = true;
+    draggedAnswer.ondragstart = function (dragEvent) {
+        drag(dragEvent, draggedAnswer);
+    };
+    event.target.appendChild(draggedAnswer);
 
-      checkOrder()
+    checkOrder();
 }
 
-function drag(answer) {
-    answer.dataTransfer.setData('text', answer.target.innerText)
+function drag(event) {
+    event.dataTransfer.setData('text', event.target.innerText)
 }
 
 function checkOrder() {
@@ -56,7 +56,7 @@ function checkOrder() {
 
     if (arraysEqual(currentOrder, correctOrder)) {
         alert("Congrats!!, You've arrenged the events in the correct order")
-    } else {}
+    }
 }
 
 function arraysEqual(arrOne, arrTwo) {
@@ -70,4 +70,8 @@ function arraysEqual(arrOne, arrTwo) {
         }
     }
     return true
+}
+
+function allowDrop(event) {
+    event.preventDefault()
 }
