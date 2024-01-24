@@ -26,11 +26,10 @@
         <div id="logic-puzzle">
             <div id="multiple-choice">
                 <!-- <img id="answerOne" class="correctAnswer" src="../assets/realKirbmyKirby.png" onclick="correctAnswer()"> -->
-                <button data-modal-target="#modal"><img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" /></button>
+                <img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" data-modal-target="#modal"/>
                 <div class="modal" id="modal">
                     <div class="modal-header">
                         <div class="modal-title">Question?...</div>
-                        <button data-close-button class="close-btn">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="multi-choice-answers">Answer one...</div>
@@ -43,7 +42,7 @@
             </div>
         </div>
         <div id="overlay"></div>
-        <div id="grass-patch">
+        <div id="grass-patch"> 
           <div id="logic-question">Question</div>
           <img
             loading="lazy"
@@ -53,10 +52,10 @@
         </div>
         <div id="clues-box">
           <div class="clue" id="clue-box-title">clues</div>
-          <div class="clue">The first clue....</div>
-          <div class="clue">The second clue....</div>
-          <div class="clue">The third clue....</div>
-          <div class="clue">The fourth clue....</div>
+          <div id="clue1" class="clue">The first clue....</div>
+          <div id="clue2" class="clue">The second clue....</div>
+          <div id="clue3" class="clue">The third clue....</div>
+          <div id="clue4" class="clue">The fourth clue....</div>
         </div>
       </div>
       

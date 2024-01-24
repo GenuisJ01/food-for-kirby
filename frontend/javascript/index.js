@@ -1,6 +1,5 @@
 // Main javascript file for all behaviour in index.html
-const openModalButtons = document.querySelectorAll('[data-model-toggle]')
-const closeModalButton = document.querySelector('[data-close-btn]')
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const overlay = document.getElementById('overlay')
 
 function openModal(modal) {
@@ -13,6 +12,13 @@ function closeModal(modal) {
     overlay.classList.remove('active')
 }
 
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active') 
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
+})
+
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -20,9 +26,3 @@ openModalButtons.forEach(button => {
     })
 })
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal')
-        closeModal(modal)
-    })
-})

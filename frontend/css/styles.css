@@ -9,7 +9,7 @@ width: auto;
 
 .overlay {
   position: fixed;
-  width: 1800px;
+  width: 1800px; 
   height: 900px;
   border: 1px solid rgb(226, 189, 200, 0.7);
   background-color: rgb(226, 189, 200, 0.7);
@@ -397,8 +397,7 @@ width: auto;
   }
   #logic-question {
     color: #ff96d5;
-    -webkit-text-stroke-width: 5;
-    -webkit-text-stroke-color: #fff967;
+    -webkit-text-stroke: 4px #fff967;
     margin-top: 84px;
     flex-grow: 1;
     flex-basis: auto;
@@ -450,22 +449,22 @@ width: auto;
       font-size: 40px;
     }
   }
-  .clue {
+  #clue1 {
     color: #fff;
     margin-top: 27px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue2 {
     color: #fff;
     margin-top: 32px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue3 {
     color: #fff;
     margin-top: 29px;
     font: 400 35px Inter, sans-serif;
   }
-  .clue {
+  #clue4 {
     color: #fff;
     margin-top: 28px;
     font: 400 35px Inter, sans-serif;
