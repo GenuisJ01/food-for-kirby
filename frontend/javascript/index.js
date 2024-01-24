@@ -56,5 +56,18 @@ function checkOrder() {
 
     if (arraysEqual(currentOrder, correctOrder)) {
         alert("Congrats!!, You've arrenged the events in the correct order")
+    } else {}
+}
+
+function arraysEqual(arrOne, arrTwo) {
+    if (arrOne.length != arrTwo.length) {
+        return false
+    } else {
+        for (let i = 0; i < arrOne.length; i++) {
+            if (arrOne[i] != arrTwo[i]) {
+                return false
+            }
+        }
     }
+    return true
 }
