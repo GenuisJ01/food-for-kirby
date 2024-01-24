@@ -53,9 +53,9 @@ app.use(logger);
 
 app.get('/', (req, res) => {
     if (profiles.length == 1 && clues.length == 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} topic to pick from!`);
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There is currently ${profiles.length} profile made, and a total of ${clues.length} topic to pick from!`);
     } else if (profiles.length == 1 && clues.length > 1) {
-        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profile made, and a total of ${clues.length} topics to pick from!`)
+        res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There is currently ${profiles.length} profile made, and a total of ${clues.length} topics to pick from!`)
     } else if (profiles.length > 1 && clues.length == 1) {
         res.status(200).send(`Kirby would like to have a word... He wants to show you this data! There are currently ${profiles.length} profiles made, and a total of ${clues.length} topic to pick from!`)
     } else if (profiles.length > 1 && clues.length > 1) {
@@ -74,23 +74,23 @@ app.patch('/profiles/', (req, res) => {
         if (changes.name != originalProfile.name) {
             changedProfile.name = changes.name;
         } 
-        if (changes.progress.lives != originalProfile.progress.lives) {
-            changedProfile.progress.lives = changes.progress.lives;
+        if (changes.lives != originalProfile.lives) {
+            changedProfile.lives = changes.lives;
         } 
-        if (changes.progress.rome != originalProfile.progress.rome) {
-            changedProfile.progress.rome = changes.progress.rome;
+        if (changes.rome != originalProfile.rome) {
+            changedProfile.rome = changes.rome;
         } 
-        if (changes.progress.renaissance != originalProfile.progress.renaissance) {
-            changedProfile.progress.renaissance = changes.progress.renaissance;
+        if (changes.renaissance != originalProfile.renaissance) {
+            changedProfile.renaissance = changes.renaissance;
         } 
-        if (changes.progress.ww1 != originalProfile.progress.ww1) {
-            changedProfile.progress.ww1 = changes.progress.ww1;
+        if (changes.ww1 != originalProfile.ww1) {
+            changedProfile.ww1 = changes.ww1;
         } 
-        if (changes.progress.ww2 != originalProfile.progress.ww2) {
-            changedProfile.progress.ww2 = changes.progress.ww2;
+        if (changes.ww2 != originalProfile.ww2) {
+            changedProfile.ww2 = changes.ww2;
         } 
-        if (changes.progress.medicine != originalProfile.progress.medicine) {
-            changedProfile.progress.medicine = changes.progress.medicine;
+        if (changes.medicine != originalProfile.medicine) {
+            changedProfile.medicine = changes.medicine;
         }
 
         for (let i = 0; i < profiles.length; i++) {
