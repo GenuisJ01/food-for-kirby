@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../javascript/index.js" defer></script>
+    <script src="../javascript/puzzle1.js" defer></script>
     <title>Food For Kirby</title>
 </head>
 <body>
@@ -23,27 +23,87 @@
           />
           
         </div>
-        <div id="logic-puzzle">
+        <div id="game">
             <div id="multiple-choice">
                 <!-- <img id="answerOne" class="correctAnswer" src="../assets/realKirbmyKirby.png" onclick="correctAnswer()"> -->
-                <button data-modal-target="#modal"><img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" /></button>
+                <img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" data-modal-target="#modal"/>
                 <div class="modal" id="modal">
+                  <!-- <img loading="lazy" srcset="../assets/Hint_chance.png" id="hint-kirby"> -->
                     <div class="modal-header">
                         <div class="modal-title">Question?...</div>
-                        <button data-close-button class="close-btn">&times;</button>
                     </div>
-                    <div class="modal-body">
-                        <div class="multi-choice-answers">Answer one...</div>
-                        <div class="multi-choice-answers">Answer one...</div>
-                        <div class="multi-choice-answers">Answer one...</div>
-                        <div class="multi-choice-answers">Answer one...</div>
+                    <div class="modal-body" id="multi-choice-container">
+                        <div id="answer-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                          <p>Drag and drop the events to arrange them in chronological order:</p>
+                        </div>
+                        <div id="choice1" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 1: Discovery of America in 1492">Event 1: Discovery of America in 1492</div>
+                        <div id="choice2" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 2: French Revolution in 1789">Event 2: French Revolution in 1789</div>
+                        <div id="choice3" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 3: World War II in 1939">Event 3: World War II in 1939</div>
+                        <div id="choice4" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 4: Moon Landing in 1969">Event 4: Moon Landing in 1969</div>
 
                     </div>
                 </div>
+                <dialog id="popup">
+                  <p>Congrats! You're 100% correct</p>
+                  <button id="closePopup">Close</button>
+                </dialog>
             </div>
         </div>
         <div id="overlay"></div>
-        <div id="grass-patch">
+        <div id="logic-puzzle">
+          <div class="grid-container">
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="depth h1a"></div> <!-- h1a -->
+            <div class="grid-item" id="depth h1b"></div> <!-- h1b -->
+            <div class="grid-item" id="depth h1c"></div> <!-- h1c -->
+            <div class="grid-item" id="h3a"></div> <!-- h3a -->
+            <div class="grid-item" id="h3b"></div> <!-- h3b -->
+            <div class="grid-item" id="h3c"></div> <!-- h3c -->
+            <div class="grid-item" id="depth h2a"></div> <!-- h2a -->
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth h2b"></div> <!-- h2b -->
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth h2c"></div> <!-- h2c -->
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="h4a"></div> <!-- h4a -->
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="h4b"></div> <!-- h4b -->
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="h4c"></div> <!-- h4c -->
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="depth"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+            <div class="grid-item" id="inactive-grid"></div>
+          </div>
+        </div>
+        <div id="grass-patch"> 
           <div id="logic-question">Question</div>
           <img
             loading="lazy"
@@ -53,10 +113,10 @@
         </div>
         <div id="clues-box">
           <div class="clue" id="clue-box-title">clues</div>
-          <div class="clue">The first clue....</div>
-          <div class="clue">The second clue....</div>
-          <div class="clue">The third clue....</div>
-          <div class="clue">The fourth clue....</div>
+          <div id="clue1" class="clue">The first clue....</div>
+          <div id="clue2" class="clue">The second clue....</div>
+          <div id="clue3" class="clue">The third clue....</div>
+          <div id="clue4" class="clue">The fourth clue....</div>
         </div>
       </div>
       
