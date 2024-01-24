@@ -56,24 +56,27 @@ let addedAnswers = []
 function drop(event) {
     event.preventDefault();
     let data = event.dataTransfer.getData('text');
-    let answerList = document.getElementById('answer-list');
-    if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
-        let draggedAnswer = document.createElement('div');
-        draggedAnswer.className = 'multi-choice-answers';
-        draggedAnswer.innerText = data;
-        draggedAnswer.draggable = true;
-        draggedAnswer.ondragstart = function (dragEvent) {
-            drag(dragEvent, draggedAnswer);
-        };
-        event.target.appendChild(draggedAnswer);
 
-        let originalList = document.getElementById('multi-choice-container');
-        let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
-        if (originalAnswer) {
-            originalAnswer.remove();
+    if (event.target.id === 'answer-list') {
+        let answerList = document.getElementById('answer-list');
+        if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
+            let draggedAnswer = document.createElement('div');
+            draggedAnswer.className = 'multi-choice-answers';
+            draggedAnswer.innerText = data;
+            draggedAnswer.draggable = true;
+            draggedAnswer.ondragstart = function (dragEvent) {
+                drag(dragEvent, draggedAnswer);
+            };
+            event.target.appendChild(draggedAnswer);
+
+            let originalList = document.getElementById('multi-choice-container');
+            let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
+            if (originalAnswer) {
+                originalAnswer.remove();
+            }
+
+            checkOrder();
         }
-
-        checkOrder();
     }
 }
 
@@ -124,13 +127,13 @@ function allowDrop(event) {
 
 
 function showPopUp() {
-    // Show the pop-up
     let popup = document.getElementById('popup');
     popup.show();
 
-    // Add event listener to close the pop-up
     let closePopupButton = document.getElementById('closePopup');
     closePopupButton.addEventListener('click', function () {
       popup.close();
     });
+
+    closeModal(modal)
   }
