@@ -26,22 +26,29 @@ openModalButtons.forEach(button => {
     })
 })
 
-function drop(event) {
-    event.preventDefault()
-    let data = event.dataTransfer.getData('text')
-    let draggedEvent = document.createElement('div')
-    draggedEvent.className = 'event'
-    draggedEvent.innerText = data
-    draggedEvent.draggable = true
-    draggedEvent.ondragstart = function (event) {
-        drag(event);
+function drop(answer) {
+    answer.preventDefault()
+    let data = answer.dataTransfer.getData('text')
+    let draggedAnswer = document.createElement('div')
+    draggedAnswer.className = 'multi-choice-answers'
+    draggedAnswer.innerText = data
+    draggedAnswer.draggable = true
+    draggedAnswer.ondragstart = function (answer) {
+        drag(answer);
       };
-      event.target.appendChild(draggedEvent)
+      answer.target.appendChild(draggedAnswer)
 
       checkOrder()
 }
 
-function drag(event) {
-    event.dataTransfer.setData('text', event.target.innerText)
+function drag(answer) {
+    answer.dataTransfer.setData('text', answer.target.innerText)
 }
 
+function checkOrder() {
+    let answerList = document.getElementById('answer-list')
+    let answers = answerList.getElementsByClassName('multi-choice-answers')
+    let correctOrder = ["Event 1: Discovery of America in 1492", "Event 2: French Revolution in 1789", "Event 3: World War II in 1939", "Event 4: Moon Landing in 1969"]
+
+    let currentOrder = Array.from(answerss)
+}
