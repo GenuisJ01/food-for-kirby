@@ -25,10 +25,11 @@
                 <button class ="button8" id="helpfulKirby"> <img srcset="../assets/informativeKirby.png" alt="helpfulKirby" style="width:90px; height: 90px" background = "inherit"  > </button>
                 </div>
 
-                <div class = "topicsPopUp"> <p>list of topics here!</p> </div>
+            
+    
 
             <div class = "studentName"> <p>student name</p> </div>
-            <button class ="button7" id="Renaissance"> Topics Covered here!</button>
+            <button class ="button7" id="topicsCovered" onclick="openPopup()"> Topics Covered here!</button>
             <div class = "box"> </div>
                 <div class = "title"> <h1>Food For Kirby</h1>  </div>
                 <div class = "greetings"> <p>Hello Saviour of the New World!</p> </div>
@@ -40,7 +41,22 @@
                 <button class ="button4" id="WorldWarII"> 🪖 World War II</button>
                 <button class ="button5" id="Medicine"> ⚕️ Medicine</button>
                 </div>     
-                <button class ="button6" id="Medicine"> Let the feast begin!</button>     
+                <button class ="button6" id="startgame"> Let the feast begin!</button> 
+                
+                <div class = "topicsCount" id="topicsPopUp"> 
+                    <div class="topicName__AncientRome"> Ancient Rome</div>
+                    <div class="topicScore__AncientRome"> 0</div>
+                    <div class="topicsName__Renaissance"> Renaissance</div>
+                    <div class="topicScore__Renaissance"> 0</div>   
+                    <div class="topicsName__World WarI"> World War I</div>
+                    <div class="topicsScore__World WarI"> 0</div>    
+                    <div class="topicsName__World WarII"> World War II</div>
+                    <div class="topicsScore__World WarI"> 0</div>
+                    <div class="topicsName__Medicine"> Medicine</div>
+                    <div class="topicsScore__Medicine"> 0</div>
+                    <button class ="button8" id="OK" onclick=" close()"> OK</button>        
+                    </div>
+                
              </div>
             </div>
     </div>
