@@ -1,5 +1,6 @@
 // Main javascript file for all behaviour in index.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
 const logicQuestion = document.getElementById('logic-question')
@@ -81,25 +82,24 @@ function checkOrder() {
     let correctOrder = ["Event 1: Discovery of America in 1492", "Event 2: French Revolution in 1789", "Event 3: World War II in 1939", "Event 4: Moon Landing in 1969"]
 
     let currentOrder = Array.from(answers).map(function (answer) {
-        return answer.innerText
+        return answer.innerText.split('\n')[0]
     })
-
+    console.log("Current Order:", currentOrder);
+    console.log("Correct Order:", correctOrder);
     if (arraysEqual(currentOrder, correctOrder)) {
-        alert("Congrats!!, You've arrenged the events in the correct order")
-        correctAnswer()
+        showPopup()
     }
 }
 
 function arraysEqual(arrOne, arrTwo) {
     if (arrOne.length != arrTwo.length) {
         return false
-    } else {
+    }
         for (let i = 0; i < arrOne.length; i++) {
             if (arrOne[i] != arrTwo[i]) {
                 return false
             }
         }
-    }
     return true
 }
 
@@ -107,7 +107,15 @@ function allowDrop(event) {
     event.preventDefault()
 }
 
-function correctAnswer() {
-    closeModal(modal)
 
-}
+function showPopUp() {
+    // Show the pop-up
+    let popup = document.getElementById('popup');
+    popup.show();
+
+    // Add event listener to close the pop-up
+    let closePopupButton = document.getElementById('closePopup');
+    closePopupButton.addEventListener('click', function () {
+      popup.close();
+    });
+  }
