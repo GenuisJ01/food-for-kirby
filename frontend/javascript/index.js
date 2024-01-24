@@ -50,5 +50,11 @@ function checkOrder() {
     let answers = answerList.getElementsByClassName('multi-choice-answers')
     let correctOrder = ["Event 1: Discovery of America in 1492", "Event 2: French Revolution in 1789", "Event 3: World War II in 1939", "Event 4: Moon Landing in 1969"]
 
-    let currentOrder = Array.from(answerss)
+    let currentOrder = Array.from(answers).map(function (answer) {
+        return answer.innerText
+    })
+
+    if (arraysEqual(currentOrder, correctOrder)) {
+        alert("Congrats!!, You've arrenged the events in the correct order")
+    }
 }
