@@ -73,6 +73,51 @@ openModalButtons.forEach(button => {
     })
 })
 
+
+//not functional
+function createRandomDivs() {
+    // Get the multi-choice-container
+    const multiChoiceContainer = document.getElementById('multi-choice-container');
+
+    // Check if answers is empty (not fetched yet)
+    if (answers.length === 0) {
+        console.error('Answers not fetched yet. Call getAllData first.');
+        return;
+    }
+
+    // Shuffle the answers array to get a random order
+    const shuffledAnswers = shuffleArray(answers.flat());
+
+    // Create and append 4 divs with random order to the multi-choice-container
+    for (let i = 1; i <= 4; i++) {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'multi-choice-answers';
+        newDiv.id = 'choice' + i;
+        newDiv.draggable = true;
+        newDiv.ondragstart = function (event) {
+            drag(event);
+        };
+        newDiv.setAttribute('data-answer', shuffledAnswers[i - 1]);
+        newDiv.innerText = shuffledAnswers[i - 1];
+        multiChoiceContainer.appendChild(newDiv);
+    }
+}
+
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Example usage
+getAllData().then(() => {
+    // Call the function to create random divs after fetching answers
+    createRandomDivs();
+});
+
 let addedAnswers = []
 
 function drop(event) {
@@ -145,6 +190,7 @@ function arraysEqual(arrOne, arrTwo) {
     return true
 }
 
+//not working correctly, returns true immediatley
 function arraysHalfEqual(arr1, arr2) {
     const minLength = arr1.length
     const halfLength = Math.ceil(minLength / 2)
@@ -183,6 +229,7 @@ function showPopUp() {
     closeModal(modal)
   }
 
+  //not working correctly
   function showPopUpHalf() {
     let popup = document.getElementById('popup-half');
     popup.show();
