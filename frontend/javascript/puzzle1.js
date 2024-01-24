@@ -30,6 +30,8 @@ let questions = [];
 let answers = [];
 let reasons = [];
 
+updateAllHeaders();
+
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
@@ -206,4 +208,21 @@ async function getAllData() {
     answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
     reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
+    console.log(headers[0]);
+}
+
+async function updateAllHeaders() {
+    await getAllData();
+    header1a.textContent = headers[0];
+    header1b.textContent = headers[1];
+    header1c.textContent = headers[2];
+    header2a.textContent = headers[3];
+    header2b.textContent = headers[4];
+    header2c.textContent = headers[5];
+    header3a.textContent = headers[6];
+    header3b.textContent = headers[7];
+    header3c.textContent = headers[8];
+    header4a.textContent = headers[9];
+    header4b.textContent = headers[10];
+    header4c.textContent = headers[11];
 }

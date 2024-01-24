@@ -436,6 +436,66 @@ width: auto;
   #depth {
     background-color: rgba(0, 0, 0, 0.1);
   }
+  #h1a {
+    font-size: 200%;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h1b {
+    font-size: 200%;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h1c {
+    font-size: 200%;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h2a {
+    font-size: 200%;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h2b {
+    font-size: 200%;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h2c {
+    font-size: 200%;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  #h3a {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+  }
+  #h3b {
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+  }
+  #h3c {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    writing-mode: vertical-rl;
+  }
+  #h4a {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+  }
+  #h4b {
+    font-size: 1.3rem;
+    color: #FFFFFF;
+  }
+  #h4c {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+  }
   #logic-puzzle.inactive{
     transform: scale(0)
   }
