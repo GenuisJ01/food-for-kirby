@@ -15,41 +15,28 @@ app.use("/clues", express.json());
 
 app.use(logger);
 
-// app.post('/profiles',(req,res)=>{
-//     const profile=req.body;
-//     profiles.push(profile)
-//     res.status(201).send(profile)
-// })
-
-// app.post('/profiles', (req, res) => {
-//     const profile = req.body;
-//     if (typeof profile === 'object' && profile !== null) {
-//         if (
-//             'username' in profile &&
-//             typeof profile.username === 'string' &&
-//             'id' in profile &&
-//             typeof profile.id === 'string' &&
-//             'progress' in profile &&
-//             typeof profile.progress === 'object' &&
-//             profile.progress !== null &&
-//             'Number of topic attempts' in profile.progress &&
-//             typeof profile.progress['Number of topic attempts'] === 'number' &&
-//             'Number of lives' in profile.progress &&
-//             typeof profile.progress['Number of lives'] === 'number'
-//         ) {
-//             if (parseInt(profile.id) === profiles.length + 1) {
-//                 profiles.push(profile);
-//                 res.status(201).send(profile);
-//             } else {
-//                 res.status(406).send("Invalid 'id' value. It should be equal to the length of the profiles array + 1.");
-//             }
-//         } else {
-//             res.status(406).send("The profile requires a valid 'username', 'id', and 'progress' object with 'Number of topic attempts' (number) and 'Number of lives' (number).");
-//         }
-//     } else {
-//         res.status(400).send("The profile needs to be an object.");
-//     }
-// });
+app.post('/profiles', (req, res) => {
+    const profile = req.body;
+    if (
+        'username' in profile &&
+        'id' in profile &&
+        'rome' in profile &&
+        'renaissance' in profile &&
+        'ww1' in profile &&
+        'ww2' in profile &&
+        'medicine' in profile &&
+        'lives' in profile
+        ) {
+            if (parseInt(profile.id) === profiles.length+1) {
+                profiles.push(profile);
+                res.status(201).send(profile);
+            } else {
+                res.status(406).send(`Invalid id value. It should be equal to ${profiles.length+1}`);
+            }
+    } else {
+        res.status(406).send("The profile requires a valid username, id, number of topic1 attempts and number of lives.");
+    }
+});
 
 app.get('/', (req, res) => {
     if (profiles.length == 1 && clues.length == 1) {
@@ -121,5 +108,28 @@ app.get('/profiles/:id',(req,res)=>{
         res.send(profile);
     }
 });
+
+app.get('/clues/:topicNum',(req,res)=>{
+    const topicNum = req.params.topicNum;
+    const clue = clues.find((clue) => clue.topicNum == topicNum);
+    // function listAllTopics(data) {
+    //     const topics = [];
+    //     for (const obj of data) {
+    //         topics.push(obj.topic);
+    //     }
+    
+    //     if (topics.length >= 2) {
+    //         const lastItem = topics.pop();
+    //         return topics.join(', ') + ' or ' + lastItem;
+    //     }
+    
+    //     return topics.join('and');
+    // }
+    if (clue==undefined){
+        res.status(404).send(`This topic number does not exist. Please write a number between 1 and ${clues.length}.`)
+    } else {
+        res.send(clue)
+    }
+})
 
 module.exports = {app, port};
