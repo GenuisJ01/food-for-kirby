@@ -195,6 +195,15 @@ function showPopUp() {
     closeModal(modal)
   }
 
+  //storing answer and giving option to try again
+
+  let correctRanking = answers;
+
+function checkRanking(playerAttempt) {
+    const currentQuestion = clues.evalQ1;
+
+    const isCorrect = playerAttempt === a
+}
 
 async function getAllData() {
     const response = await fetch("http://localhost:3000/clues/1")
