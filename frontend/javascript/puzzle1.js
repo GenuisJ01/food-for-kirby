@@ -1,6 +1,6 @@
 // Main javascript file for all behaviour in puzzle1.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const generateButton = document.getElementById('generateRandomDivsButton')
+const generateButton = document.getElementById('bootleg-kirby')
 const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
@@ -79,12 +79,12 @@ openModalButtons.forEach(button => {
     })
 })
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal')
-        closeModal(modal)
-    })
-})
+// closeModalButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = button.closest('.modal')
+//         closeModal(modal)
+//     })
+// })
 
 
 function createRandomDivs(answerArray) {
@@ -109,12 +109,8 @@ function createRandomDivs(answerArray) {
     }
 }
 
-
 generateButton.addEventListener('click', async function () {
     try {
-        // Clear existing divs in the multi-choice-container
-        const multiChoiceContainer = document.getElementById('multi-choice-container')
-        multiChoiceContainer.innerHTML = ''
 
         // Wait for data to be fetched before creating random divs
         await getAllData()
@@ -125,8 +121,6 @@ generateButton.addEventListener('click', async function () {
         console.error('Error:', error)
     }
 })
-
-console.log(createRandomDivs())
 
 // Function to shuffle an array
 function shuffleArray(array) {
@@ -139,7 +133,7 @@ function shuffleArray(array) {
 
 getAllData().then(() => {
     // Call the function to create random divs after fetching answers
-    createRandomDivs();
+    createRandomDivs(answers[0]);
 });
 
 
@@ -278,7 +272,7 @@ function checkRanking(playerAttempt) {
 }
 
 async function getAllData() {
-    const response = await fetch("http://localhost:3000/clues/1")
+    const response = await fetch("http://localhost:3003/clues/1")
     const information = await response.json();
     question = information.question;
     clues.push(information.clue1, information.clue2, information.clue3);
