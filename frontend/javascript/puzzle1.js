@@ -1,4 +1,12 @@
 // Main javascript file for all behaviour in puzzle1.html
+let question = "";
+let headers = [];
+let excerpts = [];
+let clues = [];
+let questions = [];
+let answers = [];
+let reasons = [];
+
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const generateButton = document.getElementById('bootleg-kirby')
 const closeModalButtons = document.querySelector('[data-close-btn]')
@@ -25,14 +33,6 @@ const header4a = document.getElementById('h4a');
 const header4b = document.getElementById('h4b');
 const header4c = document.getElementById('h4c');
 const cleaned_grid = document.getElementsByClassName('grid-item');
-
-let question = "";
-let headers = [];
-let excerpts = [];
-let clues = [];
-let questions = [];
-let answers = [];
-let reasons = [];
 
 updateAll();
 
@@ -87,12 +87,31 @@ openModalButtons.forEach(button => {
 // })
 
 
-function createRandomDivs(answerArray) {
-    // Get the multi-choice-container
-    const multiChoiceContainer = document.getElementById('multi-choice-container');
+function createRandomDivs(answerArray, questionArray) {
+    // Get the multi-choice-container and the modal title
+    const multiChoiceContainer = document.getElementById('multi-choice-container')
+    let multiChoiceQuestion = document.getElementById('modal-title')
 
     // Shuffle the answer array to get a random order
-    const shuffledAnswers = shuffleArray(answerArray);
+    const shuffledAnswers = shuffleArray(answerArray)
+
+    multiChoiceContainer.innerHTML = ''
+
+    //sets modal title to which ever question from the question array is passed in
+    multiChoiceQuestion.innerText = questionArray
+
+    // Creates the answer-list div and assigns an id as well as attributes
+    const answerListDiv = document.createElement('div')
+    answerListDiv.id = 'answer-list'
+    answerListDiv.setAttribute('ondrop', 'drop(event)')
+    answerListDiv.setAttribute('ondragover', 'allowDrop(event)')
+
+    //Adding a p element with text
+    const pElement = document.createElement('p')
+    pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:'
+
+    answerListDiv.appendChild(pElement)
+    multiChoiceContainer.appendChild(answerListDiv)
 
     // Create and append 4 divs with random order to the multi-choice-container
     for (let i = 1; i <= 4; i++) {
@@ -116,7 +135,7 @@ generateButton.addEventListener('click', async function () {
         await getAllData()
         
         // Pass the first array from the answers array to createRandomDivs
-        createRandomDivs(answers[0])
+        initialize()
     } catch (error) {
         console.error('Error:', error)
     }
@@ -131,10 +150,14 @@ function shuffleArray(array) {
     return array;
 }
 
-getAllData().then(() => {
-    // Call the function to create random divs after fetching answers
-    createRandomDivs(answers[0]);
-});
+async function initialize() {
+    await getAllData();
+     // Call the function to create random divs after fetching the answers
+      createRandomDivs(answers[0], questions[0]);
+}
+
+// Call the initialization function
+initialize()
 
 
 
@@ -278,7 +301,7 @@ async function getAllData() {
     clues.push(information.clue1, information.clue2, information.clue3);
     excerpts.push(information.excerpt1, information.excerpt2, information.excerpt3);
     questions.push(information.question1, information.question2, information.question3);
-    answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
+    answers.push([information.answer1a, information.answer1b, information.answer1c, information.answer1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
     reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
