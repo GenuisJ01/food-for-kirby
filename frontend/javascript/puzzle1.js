@@ -1,4 +1,5 @@
 // Main javascript file for all behaviour in puzzle1.html
+<<<<<<< HEAD
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
@@ -22,6 +23,8 @@ const header3c = document.getElementById('h3c');
 const header4a = document.getElementById('h4a');
 const header4b = document.getElementById('h4b');
 const header4c = document.getElementById('h4c');
+const cleaned_grid = document.getElementsByClassName('grid-item');
+
 let question = "";
 let headers = [];
 let excerpts = [];
@@ -30,9 +33,17 @@ let questions = [];
 let answers = [];
 let reasons = [];
 
+updateAll();
+=======
+const openModalButtons = document.querySelectorAll('[data-model-toggle]')
+const closeModalButton = document.querySelector('[data-close-btn]')
+const overlay = document.getElementById('overlay')
+>>>>>>> angelika
+
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
+<<<<<<< HEAD
     logicPuzzle.classList.add('inactive')
     logicQuestion.classList.add('inactive')
     cluesBox.classList.add('inactive')
@@ -66,6 +77,15 @@ overlay.addEventListener('click', () => {
 })
 
 //will open whatever modal is attached to that button
+=======
+}
+
+function closeModal(modal) {
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+>>>>>>> angelika
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -73,6 +93,7 @@ openModalButtons.forEach(button => {
     })
 })
 
+<<<<<<< HEAD
 let addedAnswers = []
 
 function drop(event) {
@@ -207,3 +228,51 @@ async function getAllData() {
     reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
+
+async function updateAll() {
+    await getAllData();
+    header1a.textContent = headers[0];
+    header1b.textContent = headers[1];
+    header1c.textContent = headers[2];
+    header2a.textContent = headers[3];
+    header2b.textContent = headers[4];
+    header2c.textContent = headers[5];
+    header3a.textContent = headers[6];
+    header3b.textContent = headers[7];
+    header3c.textContent = headers[8];
+    header4a.textContent = headers[9];
+    header4b.textContent = headers[10];
+    header4c.textContent = headers[11];
+    
+    clue1.textContent = clues[0];
+    clue2.textContent = clues[1];
+    clue3.textContent = clues[2];
+
+    logicQuestion.textContent = question;
+}
+
+for (let i of cleaned_grid) {
+    i.addEventListener('click', () => {
+        if (i.innerHTML  != '<img src="../assets/Yellow_x.png" width="54px" height="54px">') {
+            i.innerHTML  = '<img src="../assets/Yellow_x.png" width="54px" height="54px">';
+        } else {
+            i.innerHTML = '';
+        }
+    })
+    i.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (i.innerHTML != '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+            i.innerHTML = '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">';
+        } else {
+            i.innerHTML = '';
+        }
+    })
+}
+=======
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+>>>>>>> angelika
