@@ -715,9 +715,10 @@ width: auto;
     position: relative;
     align-self: stretch;
     display: flex;
-    margin-top: 430px;
+    margin-top: 700px;
     align-items: end;
     justify-content: space-between;
+    height: 100px;
     gap: 20px;
   }
   @media (max-width: 991px) {
