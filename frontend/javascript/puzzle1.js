@@ -1,6 +1,6 @@
 // Main javascript file for all behaviour in puzzle1.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelector('[data-close-btn]')
+// const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
@@ -32,6 +32,7 @@ let clues = [];
 let questions = [];
 let answers = [];
 let reasons = [];
+let fillCount = 0;
 
 updateAll();
 
@@ -79,12 +80,12 @@ openModalButtons.forEach(button => {
     })
 })
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal')
-        closeModal(modal)
-    })
-})
+// closeModalButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = button.closest('.modal')
+//         closeModal(modal)
+//     })
+// })
 
 let addedAnswers = []
 
@@ -254,18 +255,44 @@ async function updateAll() {
 
 for (let i of cleaned_grid) {
     i.addEventListener('click', () => {
-        if (i.innerHTML  != '<img src="../assets/Yellow_x.png" width="54px" height="54px">') {
+        if (i.innerHTML  == '') {
+            i.innerHTML  = '<img src="../assets/Yellow_x.png" width="54px" height="54px">';
+            fillCount++;
+        } else if (i.innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
             i.innerHTML  = '<img src="../assets/Yellow_x.png" width="54px" height="54px">';
         } else {
             i.innerHTML = '';
+            fillCount--;
+        }
+        if (fillCount >= 27) {
+            checkGrid();
         }
     })
     i.addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        if (i.innerHTML != '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+        if (i.innerHTML == '') {
+            i.innerHTML = '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">';
+            fillCount++;
+        } else if (i.innerHTML == '<img src="../assets/Yellow_x.png" width="54px" height="54px">') {
             i.innerHTML = '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">';
         } else {
             i.innerHTML = '';
+            fillCount--;
+        }
+        if (fillCount >= 27) {
+            checkGrid();
         }
     })
+}
+
+function checkGrid() {
+    if(cleaned_grid[1].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[4].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[6].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[9].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[14].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[17].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[18].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[22].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[26].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+        console.log("Correct!");
+    } else {
+        console.log("Incorrect!");
+    }
 }
