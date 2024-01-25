@@ -8,7 +8,7 @@ let answers = [];
 let reasons = [];
 
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const generateButton = document.getElementById('bootleg-kirby')
+const generateButton = document.getElementById('bootleg-kirby') //change to correct answer in grid
 const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
@@ -33,6 +33,8 @@ const header4a = document.getElementById('h4a');
 const header4b = document.getElementById('h4b');
 const header4c = document.getElementById('h4c');
 const cleaned_grid = document.getElementsByClassName('grid-item');
+const sortableList = document.getElementById("sortable-list");
+const submitBtn = document.getElementById("submit");
 
 updateAll();
 
@@ -86,47 +88,73 @@ openModalButtons.forEach(button => {
 //     })
 // })
 
+// Call the dragDrop function to set up drag and drop events
+dragDrop();
 
 function createRandomDivs(answerArray, questionArray) {
     // Get the multi-choice-container and the modal title
-    const multiChoiceContainer = document.getElementById('multi-choice-container')
-    let multiChoiceQuestion = document.getElementById('modal-title')
+    const multiChoiceContainer = document.getElementById('multi-choice-container');
+    let multiChoiceQuestion = document.getElementById('modal-title');
 
     // Shuffle the answer array to get a random order
-    const shuffledAnswers = shuffleArray(answerArray)
+    const shuffledAnswers = shuffleArray(answerArray);
 
-    multiChoiceContainer.innerHTML = ''
+    multiChoiceContainer.innerHTML = '';
 
-    //sets modal title to which ever question from the question array is passed in
-    multiChoiceQuestion.innerText = questionArray
+    // Sets modal title to whichever question from the question array is passed in
+    multiChoiceQuestion.innerText = questionArray;
 
-    // Creates the answer-list div and assigns an id as well as attributes
-    const answerListDiv = document.createElement('div');
-    answerListDiv.id = 'answer-list';
+    // Create the answer-list div and assign an id as well as attributes
+    const answerListDiv = document.createElement('ul');
+    answerListDiv.id = 'sortable-list';
     answerListDiv.setAttribute('ondrop', 'drop(event)');
     answerListDiv.setAttribute('ondragover', 'allowDrop(event)');
 
-    //Adding a p element with text
+    // Adding a p element with text
     const pElement = document.createElement('p');
-    pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:'
+    pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:';
+    pElement.id = 'multi-choice-title'
 
     answerListDiv.appendChild(pElement);
-    multiChoiceContainer.appendChild(answerListDiv)
+    multiChoiceContainer.appendChild(answerListDiv);
 
-    // Create and append 4 divs with random order to the multi-choice-container
+    // Declare draggedItem outside the event listeners
+    let draggedItem = null;
+
+    // Create and append 4 li elements with random order to the multi-choice-container
     for (let i = 1; i <= 4; i++) {
-        const newDiv = document.createElement('div')
-        newDiv.className = 'multi-choice-answers'
-        newDiv.id = 'choice' + i
-        newDiv.draggable = true
-        newDiv.ondragstart = function (event) {
-            drag(event)
+        const newLi = document.createElement('li');
+        newLi.className = 'multi-choice-answers';
+        newLi.id = 'choice' + i;
+        newLi.draggable = true;
+        newLi.ondragstart = function (event) {
+            // Set the draggedItem when drag starts
+            draggedItem = event.target;
+            drag(event);
         };
-        newDiv.setAttribute('data-answer', shuffledAnswers[i - 1])
-        newDiv.innerText = shuffledAnswers[i - 1]
-        multiChoiceContainer.appendChild(newDiv)
+        newLi.setAttribute('data-answer', shuffledAnswers[i - 1]);
+        newLi.innerText = shuffledAnswers[i - 1];
+
+        // Add the drag and drop functionality for the li elements
+        newLi.ondragover = function (event) {
+            event.preventDefault();
+        };
+        newLi.ondrop = function (event) {
+            event.preventDefault();
+            const target = event.target;
+            if (target.classList.contains('multi-choice-answers')) {
+                const targetIndex = Array.from(answerListDiv.children).indexOf(target);
+                const draggedIndex = Array.from(answerListDiv.children).indexOf(draggedItem);
+                if (draggedIndex !== targetIndex) {
+                    answerListDiv.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
+                }
+            }
+        };
+
+        answerListDiv.appendChild(newLi);
     }
 }
+
 
 generateButton.addEventListener('click', async function () {
     try {
@@ -159,35 +187,89 @@ async function initialize() {
 // Call the initialization function
 initialize()
 
+function dragDrop() {
+    // Enable draggability for each item in the sortableList
+    Array.from(sortableList.children).forEach(item => {
+        item.draggable = true;
+    });
 
+    let draggedItem = null;
 
-function drop(event) {
-    event.preventDefault();
-    let data = event.dataTransfer.getData('text');
-    let addedAnswers = []
+    // Event listener for the dragstart event
+    sortableList.addEventListener("dragstart", function (event) {
+        // Store the dragged item
+        draggedItem = event.target;
+        
+        // Set the allowed drag effect
+        event.dataTransfer.effectAllowed = "move";
+        
+        // Set dummy data for Firefox to enable dragging
+        event.dataTransfer.setData('text/plain', '');
+    });
 
-    if (event.target.id === 'answer-list') {
-        let answerList = document.getElementById('answer-list');
-        if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
-            let draggedAnswer = document.createElement('div');
-            draggedAnswer.className = 'multi-choice-answers';
-            draggedAnswer.innerText = data;
-            draggedAnswer.draggable = true;
-            draggedAnswer.ondragstart = function (dragEvent) {
-                drag(dragEvent, draggedAnswer);
-            };
-            event.target.appendChild(draggedAnswer);
+    // Event listener for the dragover event
+    sortableList.addEventListener("dragover", function (event) {
+        // Prevent the default behavior of the dragover event
+        event.preventDefault();
+        
+        // Set the drop effect to 'move'
+        event.dataTransfer.dropEffect = 'move';
+    });
 
-            let originalList = document.getElementById('multi-choice-container');
-            let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
-            if (originalAnswer) {
-                originalAnswer.remove();
+    // Event listener for the drop event
+    sortableList.addEventListener("drop", function (event) {
+        // Prevent the default behavior of the drop event
+        event.preventDefault();
+        
+        const target = event.target;
+        
+        // Check if the target has the class 'multi-choice-answers'
+        if (target.classList.contains("multi-choice-answers")) {
+            // Get the indices of the dragged item and the target item
+            const targetIndex = Array.from(sortableList.children).indexOf(target);
+            const draggedIndex = Array.from(sortableList.children).indexOf(draggedItem);
+
+            // If the indices are different, perform the reorder
+            if (draggedIndex !== targetIndex) {
+                sortableList.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
             }
-
-            checkOrder();
         }
-    }
+    });
+
+    // Event listener for the submitBtn click event
+    submitBtn.addEventListener("click", function () {
+        // Perform a checkOrder function when the submit button is clicked
+        checkOrder();
+    });
 }
+
+// function drop(event) {
+//     event.preventDefault();
+//     let data = event.dataTransfer.getData('text');
+//     let addedAnswers = []
+
+//     if (event.target.id === 'answer-list') {
+//         let answerList = document.getElementById('answer-list');
+//         if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
+//             let draggedAnswer = document.createElement('li');
+//             draggedAnswer.className = 'multi-choice-answers';
+//             draggedAnswer.innerText = data;
+//             draggedAnswer.draggable = true;
+//             draggedAnswer.ondragstart = function (dragEvent) {
+//                 drag(dragEvent, draggedAnswer);
+//             };
+//             event.target.appendChild(draggedAnswer);
+
+//             let originalList = document.getElementById('multi-choice-container');
+//             let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
+//             if (originalAnswer) {
+//                 originalAnswer.remove();
+//             }
+
+//             checkOrder();
+//         }
+//     }
+// }
 
 function answerExists(answerList, answer) {
     let answers = answerList.getElementsByClassName('multi-choice-answers');

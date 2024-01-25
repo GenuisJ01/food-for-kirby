@@ -33,8 +33,16 @@
                         <div id="modal-title"></div>
                     </div>
                     <div class="modal-body" id="multi-choice-container">
-                        <div id="answer-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div id="answer-list">
                           <p>Drag and drop the events to arrange them in chronological order:</p>
+                          <ul id="sortable-list">
+                            <li class="multi-choice-answers" id="choice1">Answer 1</li>
+                            <li class="multi-choice-answers" id="choice2">Answer 2</li>
+                            <li class="multi-choice-answers" id="choice3">Answer 3</li>
+                            <li class="multi-choice-answers" id="choice4">Answer 4</li>
+                          </ul>
+                          <br>
+                          <button id="submit">Submit</button>
                         </div>
                     </div>
                 </div>
