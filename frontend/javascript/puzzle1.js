@@ -1,4 +1,5 @@
 // Main javascript file for all behaviour in puzzle1.html
+<<<<<<< HEAD
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
@@ -33,10 +34,16 @@ let answers = [];
 let reasons = [];
 
 updateAll();
+=======
+const openModalButtons = document.querySelectorAll('[data-model-toggle]')
+const closeModalButton = document.querySelector('[data-close-btn]')
+const overlay = document.getElementById('overlay')
+>>>>>>> angelika
 
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
+<<<<<<< HEAD
     logicPuzzle.classList.add('inactive')
     logicQuestion.classList.add('inactive')
     cluesBox.classList.add('inactive')
@@ -70,6 +77,15 @@ overlay.addEventListener('click', () => {
 })
 
 //will open whatever modal is attached to that button
+=======
+}
+
+function closeModal(modal) {
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+>>>>>>> angelika
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -77,6 +93,7 @@ openModalButtons.forEach(button => {
     })
 })
 
+<<<<<<< HEAD
 let addedAnswers = []
 
 function drop(event) {
@@ -251,3 +268,11 @@ for (let i of cleaned_grid) {
         }
     })
 }
+=======
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+>>>>>>> angelika
