@@ -1,6 +1,6 @@
 // Main javascript file for all behaviour in puzzle1.html
-<<<<<<< HEAD
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
@@ -34,16 +34,10 @@ let answers = [];
 let reasons = [];
 
 updateAll();
-=======
-const openModalButtons = document.querySelectorAll('[data-model-toggle]')
-const closeModalButton = document.querySelector('[data-close-btn]')
-const overlay = document.getElementById('overlay')
->>>>>>> angelika
 
 function openModal(modal) {
     modal.classList.add('active')
     overlay.classList.add('active')
-<<<<<<< HEAD
     logicPuzzle.classList.add('inactive')
     logicQuestion.classList.add('inactive')
     cluesBox.classList.add('inactive')
@@ -77,15 +71,7 @@ overlay.addEventListener('click', () => {
 })
 
 //will open whatever modal is attached to that button
-=======
-}
 
-function closeModal(modal) {
-    modal.classList.remove('active')
-    overlay.classList.remove('active')
-}
-
->>>>>>> angelika
 openModalButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
@@ -93,7 +79,13 @@ openModalButtons.forEach(button => {
     })
 })
 
-<<<<<<< HEAD
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal')
+        closeModal(modal)
+    })
+})
+
 let addedAnswers = []
 
 function drop(event) {
@@ -216,6 +208,15 @@ function showPopUp() {
     closeModal(modal)
   }
 
+  //storing answer and giving option to try again
+
+  let correctRanking = answers;
+
+function checkRanking(playerAttempt) {
+    const currentQuestion = clues.evalQ1;
+
+    const isCorrect = playerAttempt === a
+}
 
 async function getAllData() {
     const response = await fetch("http://localhost:3000/clues/1")
@@ -268,11 +269,3 @@ for (let i of cleaned_grid) {
         }
     })
 }
-=======
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal')
-        closeModal(modal)
-    })
-})
->>>>>>> angelika

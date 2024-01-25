@@ -18,5 +18,3 @@ function openPopup2(){
 function closePopup2(){
     popup.classlist.remove("open-popup2");
 }
-
-
