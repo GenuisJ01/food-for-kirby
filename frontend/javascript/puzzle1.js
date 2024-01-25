@@ -1,16 +1,17 @@
 // Main javascript file for all behaviour in puzzle1.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const generateButton = document.getElementById('generateRandomDivsButton')
 const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
 const logicQuestion = document.getElementById('logic-question')
-const cluesBox = document.getElementById('clues-box')
-const clueTitle = document.getElementById('clue-box-title')
-const clue1 = document.getElementById('clue1')
-const clue2 = document.getElementById('clue2')
-const clue3 = document.getElementById('clue3')
-const clue4 = document.getElementById('clue4')
+const exerptsBox = document.getElementById('exerpts-box')
+const exerptTitle = document.getElementById('exerpt-box-title')
+const exerpt1 = document.getElementById('exerpt1')
+const exerpt2 = document.getElementById('exerpt2')
+const exerpt3 = document.getElementById('exerpt3')
+const exerpt4 = document.getElementById('exerpt4')
 const header1a = document.getElementById('h1a');
 const header1b = document.getElementById('h1b');
 const header1c = document.getElementById('h1c');
@@ -40,12 +41,12 @@ function openModal(modal) {
     overlay.classList.add('active')
     logicPuzzle.classList.add('inactive')
     logicQuestion.classList.add('inactive')
-    cluesBox.classList.add('inactive')
-    clueTitle.classList.add('inactive')
-    clue1.classList.add('inactive')
-    clue2.classList.add('inactive')
-    clue3.classList.add('inactive')
-    clue4.classList.add('inactive')
+    exerptsBox.classList.add('inactive')
+    exerptTitle.classList.add('inactive')
+    exerpt1.classList.add('inactive')
+    exerpt2.classList.add('inactive')
+    exerpt3.classList.add('inactive')
+    exerpt4.classList.add('inactive')
 }
 
 //removes the modal and overlay and brings back all other elements
@@ -54,12 +55,12 @@ function closeModal(modal) {
     overlay.classList.remove('active')
     logicPuzzle.classList.remove('inactive')
     logicQuestion.classList.remove('inactive')
-    cluesBox.classList.remove('inactive')
-    clueTitle.classList.remove('inactive')
-    clue1.classList.remove('inactive')
-    clue2.classList.remove('inactive')
-    clue3.classList.remove('inactive')
-    clue4.classList.remove('inactive')
+    exerptsBox.classList.remove('inactive')
+    exerptTitle.classList.remove('inactive')
+    exerpt1.classList.remove('inactive')
+    exerpt2.classList.remove('inactive')
+    exerpt3.classList.remove('inactive')
+    exerpt4.classList.remove('inactive')
 }
 
 //adds overlay to the background when modal button is clicked
@@ -86,34 +87,46 @@ closeModalButtons.forEach(button => {
 })
 
 
-//not functional
-function createRandomDivs() {
+function createRandomDivs(answerArray) {
     // Get the multi-choice-container
     const multiChoiceContainer = document.getElementById('multi-choice-container');
 
-    // Check if answers is empty (not fetched yet)
-    if (answers.length === 0) {
-        console.error('Answers not fetched yet. Call getAllData first.');
-        return;
-    }
-
-    // Shuffle the answers array to get a random order
-    const shuffledAnswers = shuffleArray(answers.flat());
+    // Shuffle the answer array to get a random order
+    const shuffledAnswers = shuffleArray(answerArray);
 
     // Create and append 4 divs with random order to the multi-choice-container
     for (let i = 1; i <= 4; i++) {
-        const newDiv = document.createElement('div');
-        newDiv.className = 'multi-choice-answers';
-        newDiv.id = 'choice' + i;
-        newDiv.draggable = true;
+        const newDiv = document.createElement('div')
+        newDiv.className = 'multi-choice-answers'
+        newDiv.id = 'choice' + i
+        newDiv.draggable = true
         newDiv.ondragstart = function (event) {
-            drag(event);
+            drag(event)
         };
-        newDiv.setAttribute('data-answer', shuffledAnswers[i - 1]);
-        newDiv.innerText = shuffledAnswers[i - 1];
-        multiChoiceContainer.appendChild(newDiv);
+        newDiv.setAttribute('data-answer', shuffledAnswers[i - 1])
+        newDiv.innerText = shuffledAnswers[i - 1]
+        multiChoiceContainer.appendChild(newDiv)
     }
 }
+
+
+generateButton.addEventListener('click', async function () {
+    try {
+        // Clear existing divs in the multi-choice-container
+        const multiChoiceContainer = document.getElementById('multi-choice-container')
+        multiChoiceContainer.innerHTML = ''
+
+        // Wait for data to be fetched before creating random divs
+        await getAllData()
+        
+        // Pass the first array from the answers array to createRandomDivs
+        createRandomDivs(answers[0])
+    } catch (error) {
+        console.error('Error:', error)
+    }
+})
+
+console.log(createRandomDivs())
 
 // Function to shuffle an array
 function shuffleArray(array) {
@@ -124,18 +137,17 @@ function shuffleArray(array) {
     return array;
 }
 
-// Example usage
 getAllData().then(() => {
     // Call the function to create random divs after fetching answers
     createRandomDivs();
 });
 
 
-let addedAnswers = []
 
 function drop(event) {
     event.preventDefault();
     let data = event.dataTransfer.getData('text');
+    let addedAnswers = []
 
     if (event.target.id === 'answer-list') {
         let answerList = document.getElementById('answer-list');

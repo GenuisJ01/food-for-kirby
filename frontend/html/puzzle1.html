@@ -26,7 +26,7 @@
         <div id="game">
             <div id="multiple-choice">
                 <!-- <img id="answerOne" class="correctAnswer" src="../assets/realKirbmyKirby.png" onclick="correctAnswer()"> -->
-                <img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" data-modal-target="#modal"/>
+                <img loading="lazy" srcset="../assets/realKirbmykirby.png" id="bootleg-kirby" data-modal-target="#modal" id="generateRandomDivsButton"/>
                 <div class="modal" id="modal">
                   <!-- <img loading="lazy" srcset="../assets/Hint_chance.png" id="hint-kirby"> -->
                     <div class="modal-header">
@@ -36,11 +36,6 @@
                         <div id="answer-list" ondrop="drop(event)" ondragover="allowDrop(event)">
                           <p>Drag and drop the events to arrange them in chronological order:</p>
                         </div>
-                        <div id="choice1" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 1: Discovery of America in 1492">Event 1: Discovery of America in 1492</div>
-                        <div id="choice2" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 2: French Revolution in 1789">Event 2: French Revolution in 1789</div>
-                        <div id="choice3" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 3: World War II in 1939">Event 3: World War II in 1939</div>
-                        <div id="choice4" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 4: Moon Landing in 1969">Event 4: Moon Landing in 1969</div>
-
                     </div>
                 </div>
                 <dialog id="popup">
@@ -116,7 +111,7 @@
           />
         </div>
         <div id="exerpts-box">
-          <div class="exerpt" id="exerpts-box-title">exerpts</div>
+          <div class="exerpt" id="exerpts-box-title"></div>
           <div id="exerpt1" class="exerpt">The first exerpt....</div>
           <div id="exerpt2" class="exerpt">The second exerpt....</div>
           <div id="exerpt3" class="exerpt">The third exerpt....</div>
