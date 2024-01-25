@@ -4,10 +4,10 @@ const popup = document.getElementById("topicsPopUp");
 const popup2 = document.getElementById("instructions");
 const topicsButton = document.getElementById ("topicsCovered");
 const okButton = document.getElementById ("OK");
-const helpButton = document.getElementById ("helpbtn");
+const helpButton = document.getElementById ("helpfulKirby");
 const readyButton = document.getElementById ("ready");
 const studentProfile = document.getElementById ("studentProfile");
-
+const liveNumber = document.getElementById ("liveNumber");
 const romeScore = document.getElementById ("romeScore");
 const renaissanceScore = document.getElementById ("renaissanceScore");
 const ww1Score = document.getElementById ("ww1Score");
@@ -53,11 +53,12 @@ async function getProfile (){
   const response = await fetch (`http://localhost:3000/profiles/${profileID}`);
   const profile = await response.json() 
   studentProfile.innerHTML = `<p>${profile.username}</p>`
-  
+
   romeScore.textContent = profile.rome
   renaissanceScore.textContent = profile.renaissance
   ww1Score.textContent = profile.ww1
   ww2Score.textContent = profile.ww2
   medicineScore.textContent = profile.medicine
+  liveNumber.textContent = profile.lives
 }
 
