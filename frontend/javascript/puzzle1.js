@@ -101,16 +101,16 @@ function createRandomDivs(answerArray, questionArray) {
     multiChoiceQuestion.innerText = questionArray
 
     // Creates the answer-list div and assigns an id as well as attributes
-    const answerListDiv = document.createElement('div')
-    answerListDiv.id = 'answer-list'
-    answerListDiv.setAttribute('ondrop', 'drop(event)')
-    answerListDiv.setAttribute('ondragover', 'allowDrop(event)')
+    const answerListDiv = document.createElement('div');
+    answerListDiv.id = 'answer-list';
+    answerListDiv.setAttribute('ondrop', 'drop(event)');
+    answerListDiv.setAttribute('ondragover', 'allowDrop(event)');
 
     //Adding a p element with text
-    const pElement = document.createElement('p')
+    const pElement = document.createElement('p');
     pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:'
 
-    answerListDiv.appendChild(pElement)
+    answerListDiv.appendChild(pElement);
     multiChoiceContainer.appendChild(answerListDiv)
 
     // Create and append 4 divs with random order to the multi-choice-container
