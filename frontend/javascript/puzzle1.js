@@ -79,12 +79,56 @@ openModalButtons.forEach(button => {
     })
 })
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal')
-        closeModal(modal)
-    })
-})
+// closeModalButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = button.closest('.modal')
+//         closeModal(modal)
+//     })
+// })
+
+//not functional
+function createRandomDivs() {
+    // Get the multi-choice-container
+    const multiChoiceContainer = document.getElementById('multi-choice-container');
+
+    // Check if answers is empty (not fetched yet)
+    if (answers.length === 0) {
+        console.error('Answers not fetched yet. Call getAllData first.');
+        return;
+    }
+
+    // Shuffle the answers array to get a random order
+    const shuffledAnswers = shuffleArray(answers.flat());
+
+    // Create and append 4 divs with random order to the multi-choice-container
+    for (let i = 1; i <= 4; i++) {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'multi-choice-answers';
+        newDiv.id = 'choice' + i;
+        newDiv.draggable = true;
+        newDiv.ondragstart = function (event) {
+            drag(event);
+        };
+        newDiv.setAttribute('data-answer', shuffledAnswers[i - 1]);
+        newDiv.innerText = shuffledAnswers[i - 1];
+        multiChoiceContainer.appendChild(newDiv);
+    }
+}
+
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Example usage
+getAllData().then(() => {
+    // Call the function to create random divs after fetching answers
+    createRandomDivs();
+});
 
 let addedAnswers = []
 
@@ -158,6 +202,7 @@ function arraysEqual(arrOne, arrTwo) {
     return true
 }
 
+//not working correctly, returns true immediatley
 function arraysHalfEqual(arr1, arr2) {
     const minLength = arr1.length
     const halfLength = Math.ceil(minLength / 2)
@@ -196,6 +241,7 @@ function showPopUp() {
     closeModal(modal)
   }
 
+  //not working correctly
   function showPopUpHalf() {
     let popup = document.getElementById('popup-half');
     popup.show();
@@ -225,8 +271,8 @@ async function getAllData() {
     clues.push(information.clue1, information.clue2, information.clue3);
     excerpts.push(information.excerpt1, information.excerpt2, information.excerpt3);
     questions.push(information.question1, information.question2, information.question3);
-    answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
-    reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
+    answers.push([information.answer1a, information.answer1b, information.answer1c, information.answer1d], [information.answer2a, information.answer2b, information.answer2c, information.answer2d], [information.answer3a, information.answer3b, information.answer3c, information.answer3d]);
+    reasons.push([information.reason1a, information.reason1b, information.reason1c, information.reason1d], [information.reason2a, information.reason2b, information.reason2c, information.reason2d], [information.reason3a, information.reason3b, information.reason3c, information.reason3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
 

@@ -741,7 +741,7 @@ width: auto;
     align-self: stretch;
     max-width: 100%;
   }
-  #clues-box {
+  #exerpts-box {
     position: relative;
     border-radius: 40px;
     border: 12px solid rgba(255, 252, 191, 0.83);
@@ -758,55 +758,55 @@ width: auto;
     max-width: 70%;
   }
   @media (max-width: 991px) {
-    #clues-box {
+    #exerpts-box {
       margin-top: 40px;
       padding: 0 20px;
     }
   }
-  #clues-box.inactive{
+  #exerpts-box.inactive{
     transform: scale(0)
   }
-  #clue-box-title {
+  #exerpt-box-title {
     color: #fff;
     font: 400 56px Inter, sans-serif;
   }
   @media (max-width: 991px) {
-    #clue-box-title {
+    #exerpt-box-title {
       font-size: 40px;
     }
   }
-  #clue-box-title.inactive{
+  #exerpt-box-title.inactive{
     transform: scale(0)
   }
-  #clue1 {
+  #exerpt1 {
     color: #fff;
     margin-top: 27px;
     font: 400 35px Inter, sans-serif;
   }
-  #clue2 {
+  #exerpt2 {
     color: #fff;
     margin-top: 32px;
     font: 400 35px Inter, sans-serif;
   }
-  #clue3 {
+  #exerpt3 {
     color: #fff;
     margin-top: 29px;
     font: 400 35px Inter, sans-serif;
   }
-  #clue4 {
+  #exerpt4 {
     color: #fff;
     margin-top: 28px;
     font: 400 35px Inter, sans-serif;
   }
-  #clue1.inactive{
+  #exerpt1.inactive{
     transform: scale(0)
   }
-  #clue2.inactive{
+  #exerpt2.inactive{
     transform: scale(0)
   }
-  #clue3.inactive{
+  #exerpt3.inactive{
     transform: scale(0)
   }
-  #clue4.inactive{
+  #exerpt4.inactive{
     transform: scale(0)
   }
