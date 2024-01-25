@@ -32,6 +32,10 @@ const header4a = document.getElementById('h4a');
 const header4b = document.getElementById('h4b');
 const header4c = document.getElementById('h4c');
 const cleaned_grid = document.getElementsByClassName('grid-item');
+const sortableList = document.getElementById("sortable-list");
+const submitBtn = document.getElementById("submit");
+const message = document.getElementById('reason-message');
+const reason1 = document.getElementById('reason1');
 updateAll();
 function openModal(modal) {
     modal.classList.add('active')
@@ -45,6 +49,9 @@ function openModal(modal) {
     exerpt3.classList.add('inactive')
     exerpt4.classList.add('inactive')
 }
+
+    // Call dragDrop function after opening the modal
+    dragDrop();
 //removes the modal and overlay and brings back all other elements
 function closeModal(modal) {
     modal.classList.remove('active')
@@ -88,10 +95,10 @@ function createRandomDivs(answerArray, questionArray) {
     //sets modal title to which ever question from the question array is passed in
     multiChoiceQuestion.innerText = questionArray
     // Creates the answer-list div and assigns an id as well as attributes
-    const answerListDiv = document.createElement('div');
-    answerListDiv.id = 'answer-list';
-    answerListDiv.setAttribute('ondrop', 'drop(event)');
-    answerListDiv.setAttribute('ondragover', 'allowDrop(event)');
+    // const answerListDiv = document.createElement('li');
+    // answerListDiv.id = 'choice1';
+    // answerListDiv.setAttribute('ondrop', 'drop(event)');
+    // answerListDiv.setAttribute('ondragover', 'allowDrop(event)');
     //Adding a p element with text
     const pElement = document.createElement('p');
     pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:'
@@ -99,13 +106,13 @@ function createRandomDivs(answerArray, questionArray) {
     multiChoiceContainer.appendChild(answerListDiv)
     // Create and append 4 divs with random order to the multi-choice-container
     for (let i = 1; i <= 4; i++) {
-        const newDiv = document.createElement('div')
+        const newDiv = document.createElement('li')
         newDiv.className = 'multi-choice-answers'
         newDiv.id = 'choice' + i
         newDiv.draggable = true
-        newDiv.ondragstart = function (event) {
-            drag(event)
-        };
+        // newDiv.ondragstart = function (event) {
+        //     dragDrop(event)
+        // };
         newDiv.setAttribute('data-answer', shuffledAnswers[i - 1])
         newDiv.innerText = shuffledAnswers[i - 1]
         multiChoiceContainer.appendChild(newDiv)
@@ -136,119 +143,100 @@ async function initialize() {
 }
 // Call the initialization function
 initialize()
-function drop(event) {
-    event.preventDefault();
-    let data = event.dataTransfer.getData('text');
-    let addedAnswers = []
-    if (event.target.id === 'answer-list') {
-        let answerList = document.getElementById('answer-list');
-        if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
-            let draggedAnswer = document.createElement('div');
-            draggedAnswer.className = 'multi-choice-answers';
-            draggedAnswer.innerText = data;
-            draggedAnswer.draggable = true;
-            draggedAnswer.ondragstart = function (dragEvent) {
-                drag(dragEvent, draggedAnswer);
-            };
-            event.target.appendChild(draggedAnswer);
-            let originalList = document.getElementById('multi-choice-container');
-            let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
-            if (originalAnswer) {
-                originalAnswer.remove();
+//Drag and drop function
+function dragDrop() {
+    Array.from(sortableList.children).forEach(item => {
+        item.draggable = true;
+    });
+
+    let draggedItem = null;
+    sortableList.addEventListener("dragstart", function (event) {
+        draggedItem = event.target;
+        event.dataTransfer.effectAllowed = "move";
+    });
+
+    sortableList.addEventListener("dragover", function (event) {
+        event.preventDefault();
+    });
+
+    sortableList.addEventListener("drop", function (event) {
+        event.preventDefault();
+        const target = event.target;
+
+        if (target.classList.contains("multi-choice-answers")) {
+            const targetIndex = Array.from(sortableList.children).indexOf(target);
+            const draggedIndex = Array.from(sortableList.children).indexOf(draggedItem);
+
+            if (draggedIndex !== targetIndex) {
+                sortableList.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
             }
-            checkOrder();
         }
-    }
-}
-function answerExists(answerList, answer) {
-    let answers = answerList.getElementsByClassName('multi-choice-answers');
-    for (let i = 0; i < answers.length; i++) {
-        if (answers[i].innerText === answer) {
-            return true;
-        }
-    }
-    return false;
-}
-function drag(event) {
-    event.dataTransfer.setData('text', event.target.innerText)
-}
+    });
+
+    submitBtn.addEventListener("click", function () {
+        checkOrder();
+    });
+    
+};
+
 function checkOrder() {
-    let answerList = document.getElementById('answer-list')
-    let answers = answerList.getElementsByClassName('multi-choice-answers')
-    let correctOrder = ["Event 1: Discovery of America in 1492", "Event 2: French Revolution in 1789", "Event 3: World War II in 1939", "Event 4: Moon Landing in 1969"]
-    let currentOrder = Array.from(answers).map(function (answer) {
-        return answer.innerText.split('\n')[0]
-    })
-    console.log("Current Order:", currentOrder);
-    console.log("Correct Order:", correctOrder);
-    if (arraysEqual(currentOrder, correctOrder)) {
-        showPopUp()
-    } else if(arraysHalfEqual(currentOrder, correctOrder)) {
-        showPopUpHalf()
-    }
-}
-function arraysEqual(arrOne, arrTwo) {
-    if (arrOne.length != arrTwo.length) {
-        return false
-    }
-        for (let i = 0; i < arrOne.length; i++) {
-            if (arrOne[i] != arrTwo[i]) {
-                return false
-            }
-        }
-    return true
-}
-//not working correctly, returns true immediatley
-function arraysHalfEqual(arr1, arr2) {
-    const minLength = arr1.length
-    const halfLength = Math.ceil(minLength / 2)
-    while (arr1.length !== arr2.length) {
-        if (arr1.length < arr2.length) {
-            arr1.push(null); // Placeholder for missing values
+    const correctOrder = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]
+    const currentOrder = Array.from(sortableList.children).map(item => item.textContent.trim());
+
+    if (arraysAreEqual(currentOrder, correctOrder)) {
+        // All answers are correct
+        openPopup("popup", "Congrats! You're 100% correct");
+    } else {
+        // Check how many answers are correct
+        const correctCount = correctOrder.filter((value, index) => value === currentOrder[index]).length;
+
+        if (correctCount === 0) {
+            // No correct answers
+            openPopup("popup-half", "Oops! None of your answers are correct", tryAgainFunction(), revealAnswerFunction());
+        } if (correctCount === 1) {
+            // Only one correct answer
+            openPopup("popup-half", `Nice try, You got ${correctCount} out of 4 correct`, tryAgainFunction(), revealAnswerFunction());
         } else {
-            arr2.push(null); // Placeholder for missing values
+            // Partially correct answers
+            openPopup("popup-half", `Good job, You got ${correctCount} out of 4 correct`, tryAgainFunction(), revealAnswerFunction());
         }
     }
-    for (let i = 0; i < halfLength; i++) {
+}
+
+function arraysAreEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
         if (arr1[i] !== arr2[i]) {
-         return false
+            return false;
         }
     }
-    return true
+
+    return true;
 }
-function allowDrop(event) {
-    event.preventDefault()
-}
-function showPopUp() {
-    let popup = document.getElementById('popup');
-    popup.show();
-    let closePopupButton = document.getElementById('closePopup');
-    closePopupButton.addEventListener('click', function () {
-      popup.close();
+
+function openPopup(popupId, message) {
+    const popup = document.getElementById(popupId);
+    popup.querySelector('p').textContent = message;
+    popup.showModal();
+
+    popup.querySelector('button').addEventListener('click', function () {
+        popup.close();
     });
-    closeModal(modal)
-  }
-  //not working correctly
-  function showPopUpHalf() {
-    let popup = document.getElementById('popup-half');
-    popup.show();
-    let closePopupButton = document.getElementById('closePopup-half');
-    closePopupButton.addEventListener('click', function () {
-      popup.close();
-    });
-
-
-
-
-
-closeModal(modal)
-  }
-  //storing answer and giving option to try again
-  let correctRanking = answers;
-function checkRanking(playerAttempt) {
-    const currentQuestion = clues.evalQ1;
-    const isCorrect = playerAttempt === a
 }
+
+function tryAgainFunction() {
+}
+
+function revealAnswerFunction() {
+    const correctOrder = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"];
+
+    message.textContent = "Below are the reasons for this order:"
+    reason1.textContent = "abc"
+}
+
 async function getAllData() {
     const response = await fetch("http://localhost:3003/clues/1")
     const information = await response.json();

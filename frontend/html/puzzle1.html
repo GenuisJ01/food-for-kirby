@@ -34,8 +34,23 @@
                     <div class="modal-body" id="multi-choice-container">
                         <div id="answer-list" ondrop="drop(event)" ondragover="allowDrop(event)">
                           <p>Drag and drop the events to arrange them in chronological order:</p>
+                          <ul id="sortable-list">
+                            <li class="multi-choice-answers" id="choice1">Answer 1</li>
+                            <li class="multi-choice-answers" id="choice2">Answer 2</li>
+                            <li class="multi-choice-answers" id="choice3">Answer 3</li>
+                            <li class="multi-choice-answers" id="choice4">Answer 4</li>
+                          </ul>
+                          <br>
+                          <button id="submit">Submit</button>
                         </div>
                     </div>
+                    <p id="reason-message"></p>
+                    <ul id="correct-reasons" style="list-style: none;">
+                        <li id="reason1"></li>
+                        <li id="reason2"></li>
+                        <li id="reason3"></li>
+                        <li id="reason4"></li>
+                    </ul>
                 </div>
                 <dialog id="popup">
                   <p>Congrats! You're 100% correct</p>
@@ -44,6 +59,8 @@
                 <dialog id="popup-half">
                   <p>Good job, You're half correct</p>
                   <button id="closePopup-half">Close</button>
+                  <button id="tryAgainButton">Try Again</button>
+                  <button id="revealAnswerButton">Reveal Answer</button>
                 </dialog>
             </div>
         </div>
