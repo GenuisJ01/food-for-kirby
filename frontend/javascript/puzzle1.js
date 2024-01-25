@@ -74,6 +74,11 @@ overlay.addEventListener('click', () => {
 //will open whatever modal is attached to that button
 
 openModalButtons.forEach(button => {
+    button.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
         openModal(modal)
