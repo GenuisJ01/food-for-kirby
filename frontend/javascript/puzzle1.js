@@ -1,6 +1,6 @@
 // Main javascript file for all behaviour in puzzle1.html
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelector('[data-modal-btn')
+const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
@@ -84,6 +84,7 @@ closeModalButtons.forEach(button => {
         closeModal(modal)
     })
 })
+
 
 //not functional
 function createRandomDivs() {
@@ -254,6 +255,15 @@ function showPopUp() {
     closeModal(modal)
   }
 
+  //storing answer and giving option to try again
+
+  let correctRanking = answers;
+
+function checkRanking(playerAttempt) {
+    const currentQuestion = clues.evalQ1;
+
+    const isCorrect = playerAttempt === a
+}
 
 async function getAllData() {
     const response = await fetch("http://localhost:3000/clues/1")
@@ -306,6 +316,4 @@ for (let i of cleaned_grid) {
         }
     })
 }
-
-
 
