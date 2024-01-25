@@ -5,8 +5,8 @@
     "renaissance": 0,
     "ww1": 0,
     "ww2": 0,
-    "medicine": 0,
-    "lives": 3
+    "medicine": 7,
+    "lives": 1
 },
 {
     "username": "astarmemory",
@@ -16,13 +16,13 @@
     "ww1": 0,
     "ww2": 0,
     "medicine": 0,
-    "lives": 3
+    "lives": 2
 },
 {
     "username": "student1234",
     "id": "3",
     "rome": 0,
-    "renaissance": 0,
+    "renaissance": 7,
     "ww1": 0,
     "ww2": 0,
     "medicine": 0,
@@ -33,20 +33,20 @@
     "id": "4",
     "rome": 0,
     "renaissance": 0,
-    "ww1": 0,
+    "ww1": 7,
     "ww2": 0,
     "medicine": 0,
-    "lives": 3
+    "lives": 4
 },
 {
     "username": "nothere09",
     "id": "5",
-    "rome": 0,
+    "rome": 7,
     "renaissance": 0,
     "ww1": 0,
     "ww2": 0,
     "medicine": 0,
-    "lives": 3
+    "lives": 5
 }, 
 {
     "username": "helloworld",
@@ -54,8 +54,8 @@
     "rome": 0,
     "renaissance": 0,
     "ww1": 0,
-    "ww2": 0,
+    "ww2": 8,
     "medicine": 0,
-    "lives": 3
+    "lives": 6
 }
 ]
