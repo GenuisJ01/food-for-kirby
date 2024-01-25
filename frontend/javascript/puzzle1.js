@@ -241,8 +241,6 @@ function showPopUp() {
 
 
 
-New
-3:31
 closeModal(modal)
   }
   //storing answer and giving option to try again
