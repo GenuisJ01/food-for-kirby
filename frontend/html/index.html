@@ -26,8 +26,9 @@
                 </div> -->
                 <!-- <button class ="button8" id="helpfulKirby"> <img srcset="../assets/informativeKirby.png" alt="helpfulKirby" style="width:90px; height: 90px" background = "inherit"  > </button> -->
 
-            <div class = "studentProfile" id = studentProfile> <p>student name</p> </div>
-            <button class ="button7" id="topicsCovered" .onclick="openPopup()"> Topics Covered here!</button>
+            <div class = "studentProfile" id = "studentProfile"> <p>student name</p> </div>
+
+            <button class ="button7" id="topicsCovered"> Topics Covered here!</button>
 
             <div class = "box"> </div>
                 <div class = "title"> <h1>Food For Kirby</h1>  </div>
@@ -36,7 +37,7 @@
 
                 <div class = "fact"> <p>Fact of the day!</p><p1>Ancient Rome started only a few decades after Jesus was born!</p1> </div>
 
-                <button class ="button9" id="helpbtn" .onclick = "openPopup2()"> Click here To Learn How to Help!</button>
+                <button class ="button9" id="helpbtn"> Click here To Learn How to Help!</button>
 
                 <div class = "whatTopic"> <p>What topic do you want to feed Kirby today? </p> </div>
 
@@ -56,18 +57,30 @@
 
                 <button class ="button6" id="startgame"> Let the feast begin!</button> 
                 
-                <div class = "topicsCount" id="topicsPopUp"> 
+                <div class = "topicsCount" id="topicsPopUp">
+
                     <div class="topicName__AncientRome"> Ancient Rome</div>
-                    <div class="topicScore__AncientRome"> 0</div>
-                    <div class="topicsName__Renaissance"> Renaissance</div>
-                    <div class="topicScore__Renaissance"> 0</div>   
+
+                    <div class="topicScore__AncientRome" id="romeScore"> 0</div>
+
+                    <div class="topicsName__Renaissance" > Renaissance</div>
+
+                    <div class="topicScore__Renaissance" id="renaissanceScore"> 0</div>   
+
                     <div class="topicsName__World WarI"> World War I</div>
-                    <div class="topicsScore__World WarI"> 0</div>    
+
+                    <div class="topicsScore__World WarI" id="ww1Score"> 0</div> 
+                       
                     <div class="topicsName__World WarII"> World War II</div>
-                    <div class="topicsScore__World WarI"> 0</div>
+
+                    <div class="topicsScore__World WarII" id="ww2Score"> 0</div>
+
                     <div class="topicsName__Medicine"> Medicine</div>
-                    <div class="topicsScore__Medicine"> 0</div>
-                    <button class ="button8" id="OK" .onclick="closePopup()"> OK</button>        
+
+                    <div class="topicsScore__Medicine" id="medicineScore"> 0</div>
+
+                    <button class ="button8" id="OK"> OK</button>
+
                     </div>
 
                     <div class="instructions" id="instructions"> 
@@ -79,7 +92,7 @@
                             
                             Using the textbook, you can work out who and what the clues are about, and when you tick the right place, you will get a bonus question! If you get it right, I will be able to help out! </p>
 
-                            <button class ="button10" id="ready" .onclick="closePopup2()"> Ready!</button>        
+                            <button class ="button10" id="ready"> Ready!</button>        
                         </div>
 
                     </div>

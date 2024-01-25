@@ -19,7 +19,6 @@ width: auto;
 
 #introductionKirby { 
   object-fit: contain;
-  background: ;
   width: 50px;
   overflow: hidden;
   align-self: stretch;
@@ -72,7 +71,7 @@ width: auto;
 }
 
 
-.studentName{
+.studentProfile{
   position: fixed;
   top: 100px; left: 1000px; 
   width: 300px;
@@ -81,7 +80,7 @@ width: auto;
   /* box-shadow: 0 2px 4px  */
 }
 
-.studentName p{
+.studentProfile p{
   font-size: 40px;
   text-align: center; 
   color: #4b4549;
@@ -185,7 +184,7 @@ width: auto;
  text-align: center; 
  color: #4b4549;
  width: 400px ;
- transform: translate(-50%, -50%) scale(1);
+ transform: translate(-50%, -50%) scale(0.5);
  visibility: hidden;
  transform: transform 0.4s, top 0.4s;
  
@@ -227,7 +226,7 @@ width: auto;
   width: 900px;
   height: 900px;
   transform: translate(-50%, -50%) scale(1);
-  visibility: visible;
+  visibility: hidden;
   transform: transform 0.4s, top 0.4s;
 }
 
@@ -250,7 +249,6 @@ width: auto;
   top: 50%;
   transform: translate(-50%, -50%) scale(1.5);
 } 
-
 
 
 
