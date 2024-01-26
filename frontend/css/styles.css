@@ -233,14 +233,14 @@ width: auto;
 .instructions button {
   position: absolute;
   width: 100%;
-  margin-top:120%;
+  margin-top:117%;
   margin-left:-12%;
   font-size: 27px;
   background-color: white(226, 189, 200, 0.7);
   border: 3px solid #4b4549;
   color: #4b4549;
   width: 25%;
-  height: 10%;
+  height: 5%;
   cursor: pointer;
  }
 
