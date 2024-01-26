@@ -29,7 +29,7 @@ const reason1 = document.getElementById('reason1');
 const reason2 = document.getElementById('reason2');
 const reason3 = document.getElementById('reason3');
 const reason4 = document.getElementById('reason4');
-const header1a = document.getElementById('h1a');
+const header1a = document.getElementById('h1a2');
 const header1b = document.getElementById('h1b');
 const header1c = document.getElementById('h1c');
 const header2a = document.getElementById('h2a');
@@ -278,14 +278,13 @@ function revealAnswerFunction() {
 }
 
 async function getAllData() {
-    const response = await fetch("http://localhost:3000/clues/1")
+    const response = await fetch("http://localhost:3000/clues/2")
     const information = await response.json();
     question = information.question;
     clues.push(information.clue1, information.clue2, information.clue3);
     excerpts.push(information.excerpt1, information.excerpt2, information.excerpt3);
     questions.push(information.question1, information.question2, information.question3);
     answers.push([information.answer1a, information.answer1b, information.answer1c, information.answer1d], [information.answer2a, information.answer2b, information.answer2c, information.answer2d], [information.answer3a, information.answer3b, information.answer3c, information.answer3d]);
-    console.log(answers[0][0]);
     reasons.push([information.reason1a, information.reason1b, information.reason1c, information.reason1d], [information.reason2a, information.reason2b, information.reason2c, information.reason2d], [information.reason3a, information.reason3b, information.reason3c, information.reason3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
@@ -361,11 +360,11 @@ for (let i of cleaned_grid) {
 }
 
 function checkGrid() {
-    if(cleaned_grid[1].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[4].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
-    cleaned_grid[6].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[9].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
-    cleaned_grid[14].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[17].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
-    cleaned_grid[18].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[22].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
-    cleaned_grid[26].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+    if(cleaned_grid[0].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[5].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[7].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[9].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[14].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[16].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[19].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[23].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[24].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
         openGameDiv();
         openModal(modal);
     } else {
