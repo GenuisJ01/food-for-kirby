@@ -1,25 +1,28 @@
 // Main javascript file for all behaviour in puzzle1.html
-let question = "";
-let headers = [];
-let excerpts = [];
-let clues = [];
-let questions = [];
-let answers = [];
-let reasons = [];
-
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const generateButton = document.getElementById('bootleg-kirby') //change to correct answer in grid
-const closeModalButtons = document.querySelector('[data-close-btn]')
+//const closeModalButtons = document.querySelector('[data-close-btn]')
 const openCorrectModal = document.querySelector('correct-modal')
 const overlay = document.getElementById('overlay')
 const logicPuzzle = document.getElementById('logic-puzzle')
 const logicQuestion = document.getElementById('logic-question')
-const exerptsBox = document.getElementById('exerpts-box')
-const exerptTitle = document.getElementById('exerpt-box-title')
-const exerpt1 = document.getElementById('exerpt1')
-const exerpt2 = document.getElementById('exerpt2')
-const exerpt3 = document.getElementById('exerpt3')
-const exerpt4 = document.getElementById('exerpt4')
+const cluesBox = document.getElementById('clues-box')
+const clueTitle = document.getElementById('clue-box-title')
+const clue1 = document.getElementById('exerpt1')
+const clue2 = document.getElementById('exerpt2')
+const clue3 = document.getElementById('exerpt3')
+const sortableList = document.getElementById("sortable-list");
+const submitBtn = document.getElementById("submit");
+const tryAgainBtn = document.getElementById("tryAgainButton");
+const revealAnsBtn = document.getElementById("revealAnswerButton");
+const bootlegKirby = document.getElementById('bootleg-kirby');
+const modal = document.getElementById('modal');
+const choice1 = document.getElementById('choice1');
+const choice2 = document.getElementById('choice2');
+const choice3 = document.getElementById('choice3');
+const message = document.getElementById('reason-message');
+const reason1 = document.getElementById('reason1');
+const reason2 = document.getElementById('reason2');
+const reason3 = document.getElementById('reason3');
 const header1a = document.getElementById('h1a');
 const header1b = document.getElementById('h1b');
 const header1c = document.getElementById('h1c');
@@ -33,55 +36,75 @@ const header4a = document.getElementById('h4a');
 const header4b = document.getElementById('h4b');
 const header4c = document.getElementById('h4c');
 const cleaned_grid = document.getElementsByClassName('grid-item');
-const sortableList = document.getElementById("sortable-list");
-const submitBtn = document.getElementById("submit");
-const message = document.getElementById('reason-message');
-const reason1 = document.getElementById('reason1');
+
+let question = "";
+let headers = [];
+let excerpts = [];
+let clues = [];
+let questions = [];
+let answers = [];
+let reasons = [];
+let fillCount = 0;
 
 updateAll();
+
 function openModal(modal) {
+
+    shuffleSortableList();
+
     modal.classList.add('active')
     overlay.classList.add('active')
     logicPuzzle.classList.add('inactive')
     logicQuestion.classList.add('inactive')
-    exerptsBox.classList.add('inactive')
-    exerptTitle.classList.add('inactive')
-    exerpt1.classList.add('inactive')
-    exerpt2.classList.add('inactive')
-    exerpt3.classList.add('inactive')
-    exerpt4.classList.add('inactive')
+    cluesBox.classList.add('inactive')
+    clueTitle.classList.add('inactive')
+    clue1.classList.add('inactive')
+    clue2.classList.add('inactive')
+    clue3.classList.add('inactive')
 }
 
     // Call dragDrop function after opening the modal
     dragDrop();
+
+    bootlegKirby.addEventListener('click', () => {
+        openGameDiv();
+        openModal(modal);
+    });
+
 //removes the modal and overlay and brings back all other elements
 function closeModal(modal) {
     modal.classList.remove('active')
     overlay.classList.remove('active')
     logicPuzzle.classList.remove('inactive')
     logicQuestion.classList.remove('inactive')
-    exerptsBox.classList.remove('inactive')
-    exerptTitle.classList.remove('inactive')
-    exerpt1.classList.remove('inactive')
-    exerpt2.classList.remove('inactive')
-    exerpt3.classList.remove('inactive')
-    exerpt4.classList.remove('inactive')
+    cluesBox.classList.remove('inactive')
+    clueTitle.classList.remove('inactive')
+    clue1.classList.remove('inactive')
+    clue2.classList.remove('inactive')
+    clue3.classList.remove('inactive')
 }
+
 //adds overlay to the background when modal button is clicked
 overlay.addEventListener('click', () => {
-    const modals = document.querySelectorAll('.modal.active')
+    const modals = document.querySelectorAll('.modal.active') 
     modals.forEach(modal => {
         closeModal(modal)
     })
 })
+
 //will open whatever modal is attached to that button
+
 openModalButtons.forEach(button => {
+    button.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget)
         openModal(modal)
     })
 })
-
 // closeModalButtons.forEach(button => {
 //     button.addEventListener('click', () => {
 //         const modal = button.closest('.modal')
@@ -89,265 +112,74 @@ openModalButtons.forEach(button => {
 //     })
 // })
 
-// Call the dragDrop function to set up drag and drop events
-dragDrop();
-
-function createRandomDivs(answerArray, questionArray) {
-    // Get the multi-choice-container and the modal title
-    const multiChoiceContainer = document.getElementById('multi-choice-container');
-    let multiChoiceQuestion = document.getElementById('modal-title');
-
-    // Shuffle the answer array to get a random order
-    const shuffledAnswers = shuffleArray(answerArray);
-
-    multiChoiceContainer.innerHTML = '';
-
-    // Sets modal title to whichever question from the question array is passed in
-    multiChoiceQuestion.innerText = questionArray;
-
-    // Create the answer-list div and assign an id as well as attributes
-    const answerListDiv = document.createElement('ul');
-    answerListDiv.id = 'sortable-list';
-    answerListDiv.setAttribute('ondrop', 'drop(event)');
-    answerListDiv.setAttribute('ondragover', 'allowDrop(event)');
-
-    // Adding a p element with text
-    const pElement = document.createElement('p');
-    pElement.innerText = 'Drag and drop the events to arrange them in the order you deem correct:';
-    pElement.id = 'multi-choice-title'
-
-    answerListDiv.appendChild(pElement);
-    multiChoiceContainer.appendChild(answerListDiv);
-
-    // Declare draggedItem outside the event listeners
-    let draggedItem = null;
-
-    // Create and append 4 li elements with random order to the multi-choice-container
-    for (let i = 1; i <= 4; i++) {
-        const newLi = document.createElement('li');
-        newLi.className = 'multi-choice-answers';
-        newLi.id = 'choice' + i;
-        newLi.draggable = true;
-        newLi.ondragstart = function (event) {
-            // Set the draggedItem when drag starts
-            draggedItem = event.target;
-            drag(event);
-        };
-        newLi.setAttribute('data-answer', shuffledAnswers[i - 1]);
-        newLi.innerText = shuffledAnswers[i - 1];
-
-        // Add the drag and drop functionality for the li elements
-        newLi.ondragover = function (event) {
-            event.preventDefault();
-        };
-        newLi.ondrop = function (event) {
-            event.preventDefault();
-            const target = event.target;
-            if (target.classList.contains('multi-choice-answers')) {
-                const targetIndex = Array.from(answerListDiv.children).indexOf(target);
-                const draggedIndex = Array.from(answerListDiv.children).indexOf(draggedItem);
-                if (draggedIndex !== targetIndex) {
-                    answerListDiv.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
-                }
-            }
-        };
-
-        answerListDiv.appendChild(newLi);
-    }
-}
-
-
-generateButton.addEventListener('click', async function () {
-    try {
-
-        // Wait for data to be fetched before creating random divs
-        await getAllData()
-        
-        // Pass the first array from the answers array to createRandomDivs
-        initialize()
-    } catch (error) {
-        console.error('Error:', error)
-    }
-})
 
 // Function to shuffle an array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
+
+function shuffleSortableList() {
+    const items = Array.from(sortableList.children);
+
+    // Shuffle the items using Fisher-Yates algorithm with the seeded random function
+    for (let i = items.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        [items[i], items[j]] = [items[j], items[i]];
     }
-    return array;
+
+    // Append the shuffled items back to the sortableList
+    items.forEach(item => sortableList.appendChild(item));
 }
-async function initialize() {
-    await getAllData();
-     // Call the function to create random divs after fetching the answers
-      createRandomDivs(answers[0], questions[0]);
-}
-// Call the initialization function
-initialize()
-//Drag and drop function
-function dragDrop() {
-    Array.from(sortableList.children).forEach(item => {
-        item.draggable = true;
-    })};
-
-//     let draggedItem = null;
-//     sortableList.addEventListener("dragstart", function (event) {
-//         draggedItem = event.target;
-//         event.dataTransfer.effectAllowed = "move";
-//     });
-
-//     sortableList.addEventListener("dragover", function (event) {
-//         event.preventDefault();
-//     });
-
-//     sortableList.addEventListener("drop", function (event) {
-//         event.preventDefault();
-//         const target = event.target;
-
-//         if (target.classList.contains("multi-choice-answers")) {
-//             const targetIndex = Array.from(sortableList.children).indexOf(target);
-//             const draggedIndex = Array.from(sortableList.children).indexOf(draggedItem);
-
-//             if (draggedIndex !== targetIndex) {
-//                 sortableList.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
-//             }
-//         }
-//     });
-
-//     submitBtn.addEventListener("click", function () {
-//         checkOrder();
-//     });
-    
-// };
-
-async function initialize() {
-    await getAllData();
-     // Call the function to create random divs after fetching the answers
-      createRandomDivs(answers[0], questions[0]);
-}
-
-// Call the initialization function
-initialize()
 
 function dragDrop() {
-    // Enable draggability for each item in the sortableList
     Array.from(sortableList.children).forEach(item => {
         item.draggable = true;
     });
 
     let draggedItem = null;
-
-    // Event listener for the dragstart event
     sortableList.addEventListener("dragstart", function (event) {
-        // Store the dragged item
         draggedItem = event.target;
-        
-        // Set the allowed drag effect
         event.dataTransfer.effectAllowed = "move";
-        
-        // Set dummy data for Firefox to enable dragging
-        event.dataTransfer.setData('text/plain', '');
     });
 
-    // Event listener for the dragover event
     sortableList.addEventListener("dragover", function (event) {
-        // Prevent the default behavior of the dragover event
         event.preventDefault();
-        
-        // Set the drop effect to 'move'
-        event.dataTransfer.dropEffect = 'move';
     });
 
-    // Event listener for the drop event
     sortableList.addEventListener("drop", function (event) {
-        // Prevent the default behavior of the drop event
         event.preventDefault();
-        
         const target = event.target;
-        
-        // Check if the target has the class 'multi-choice-answers'
+
         if (target.classList.contains("multi-choice-answers")) {
-            // Get the indices of the dragged item and the target item
             const targetIndex = Array.from(sortableList.children).indexOf(target);
             const draggedIndex = Array.from(sortableList.children).indexOf(draggedItem);
 
-            // If the indices are different, perform the reorder
             if (draggedIndex !== targetIndex) {
                 sortableList.insertBefore(draggedItem, targetIndex > draggedIndex ? target.nextSibling : target);
             }
         }
     });
 
-    // Event listener for the submitBtn click event
     submitBtn.addEventListener("click", function () {
-        // Perform a checkOrder function when the submit button is clicked
         checkOrder();
     });
-}
-
-// function drop(event) {
-//     event.preventDefault();
-//     let data = event.dataTransfer.getData('text');
-//     let addedAnswers = []
-
-//     if (event.target.id === 'answer-list') {
-//         let answerList = document.getElementById('answer-list');
-//         if(!addedAnswers.includes(data) && !answerExists(answerList, data)) {
-//             let draggedAnswer = document.createElement('li');
-//             draggedAnswer.className = 'multi-choice-answers';
-//             draggedAnswer.innerText = data;
-//             draggedAnswer.draggable = true;
-//             draggedAnswer.ondragstart = function (dragEvent) {
-//                 drag(dragEvent, draggedAnswer);
-//             };
-//             event.target.appendChild(draggedAnswer);
-
-//             let originalList = document.getElementById('multi-choice-container');
-//             let originalAnswer = originalList.querySelector('.multi-choice-answers[data-answer="' + data + '"]');
-//             if (originalAnswer) {
-//                 originalAnswer.remove();
-//             }
-
-//             checkOrder();
-//         }
-//     }
-// }
-
-function answerExists(answerList, answer) {
-    let answers = answerList.getElementsByClassName('multi-choice-answers');
-    for (let i = 0; i < answers.length; i++) {
-        if (answers[i].innerText === answer) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function drag(event) {
-    event.dataTransfer.setData('text', event.target.innerText)
-}
+    
+};
 
 function checkOrder() {
-    const correctOrder = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"]
+    const correctOrder = ["Answer 1", "Answer 2", "Answer 3"]
     const currentOrder = Array.from(sortableList.children).map(item => item.textContent.trim());
 
     if (arraysAreEqual(currentOrder, correctOrder)) {
         // All answers are correct
-        openPopup("popup", "Congrats! You're 100% correct");
+        openPopup("Congrats! You're 100% correct");
     } else {
         // Check how many answers are correct
         const correctCount = correctOrder.filter((value, index) => value === currentOrder[index]).length;
 
         if (correctCount === 0) {
             // No correct answers
-            openPopup("popup-half", "Oops! None of your answers are correct", tryAgainFunction(), revealAnswerFunction());
-        } if (correctCount === 1) {
-            // Only one correct answer
-            openPopup("popup-half", `Nice try, You got ${correctCount} out of 4 correct`, tryAgainFunction(), revealAnswerFunction());
+            openPopupHalf("Oops! None of your answers are correct");
         } else {
             // Partially correct answers
-            openPopup("popup-half", `Good job, You got ${correctCount} out of 4 correct`, tryAgainFunction(), revealAnswerFunction());
+            openPopupHalf(`Nice try, You got ${correctCount} out of 3 correct`);
         }
     }
 }
@@ -366,13 +198,47 @@ function arraysAreEqual(arr1, arr2) {
     return true;
 }
 
-function openPopup(popupId, message) {
-    const popup = document.getElementById(popupId);
+function openPopup(message) {
+    const popup = document.getElementById("popup");
     popup.querySelector('p').textContent = message;
     popup.showModal();
 
     popup.querySelector('button').addEventListener('click', function () {
         popup.close();
+        closeGameDiv();
+    });
+}
+
+function closeGameDiv() {
+    // Add logic here to close the game div
+    // For example, hide or remove the game div element
+    const gameDiv = document.getElementById('modal'); // Replace with your actual game div id
+    gameDiv.style.display = 'none'; // Hide the game div
+    // Alternatively, you can remove the game div from the DOM if you don't need it anymore
+    // gameDiv.parentNode.removeChild(gameDiv);
+}
+
+function openGameDiv() {
+    const gameDiv = document.getElementById('modal'); // Replace with your actual game div id
+    const reasDiv = document.getElementById("correct-reasons");
+    gameDiv.style.display = 'block'; // Show the game div
+    reasDiv.style.display = 'none'
+}
+
+function openPopupHalf(message) {
+    const popup = document.getElementById("popup-half");
+    popup.querySelector('p').textContent = message;
+    popup.showModal();
+
+    tryAgainBtn.addEventListener("click", function () {
+        tryAgainFunction();
+        popup.close();
+    });
+    revealAnsBtn.addEventListener("click", function () {
+        const reasDiv = document.getElementById("correct-reasons");
+        revealAnswerFunction();
+        popup.close();
+        reasDiv.style.display = 'block'
     });
 }
 
@@ -380,23 +246,31 @@ function tryAgainFunction() {
 }
 
 function revealAnswerFunction() {
-    const correctOrder = ["Answer 1", "Answer 2", "Answer 3", "Answer 4"];
+    const correctOrder = ["Answer 1", "Answer 2", "Answer 3"];
 
-    message.textContent = "Below are the reasons for this order:"
-    reason1.textContent = "abc"
+    correctOrder.forEach((value, index) => {
+        const item = Array.from(sortableList.children).find(item => item.textContent.trim() === value);
+        sortableList.appendChild(item);
+    });
+
+    message.textContent = "Below are the reasons for the correct order above:"
+    reason1.textContent = "He sought to unite all German-speaking people into a Greater Germany and to acquire territory in Eastern Europe for agricultural and strategic purposes."
+    reason2.textContent = "The strategic advantages included a more defensible eastern border and the ability to stage future military operations in the East. This was part of Hitler's broader plan for territorial expansion and dominance in Europe."
+    reason3.textContent = "Germany signed a non-aggression pact with the Soviet Union, which included a secret protocol dividing Eastern Europe into spheres of influence. This pact ensured that the Soviet Union would not interfere with German actions in the West."
 }
 
 async function getAllData() {
-    const response = await fetch("http://localhost:3003/clues/1")
+    const response = await fetch("http://localhost:3000/clues/1")
     const information = await response.json();
     question = information.question;
     clues.push(information.clue1, information.clue2, information.clue3);
     excerpts.push(information.excerpt1, information.excerpt2, information.excerpt3);
     questions.push(information.question1, information.question2, information.question3);
-    answers.push([information.answer1a, information.answer1b, information.answer1c, information.answer1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
+    answers.push([information.answers1a, information.answers1b, information.answers1c, information.answers1d], [information.answers2a, information.answers2b, information.answers2c, information.answers2d], [information.answers3a, information.answers3b, information.answers3c, information.answers3d]);
     reasons.push([information.reasons1a, information.reasons1b, information.reasons1c, information.reasons1d], [information.reasons2a, information.reasons2b, information.reasons2c, information.reasons2d], [information.reasons3a, information.reasons3b, information.reasons3c, information.reasons3d]);
     headers.push(information.h1a, information.h1b, information.h1c, information.h2a, information.h2b, information.h2c, information.h3a, information.h3b, information.h3c, information.h4a, information.h4b, information.h4c);
 }
+
 async function updateAll() {
     await getAllData();
     header1a.textContent = headers[0];
@@ -411,24 +285,54 @@ async function updateAll() {
     header4a.textContent = headers[9];
     header4b.textContent = headers[10];
     header4c.textContent = headers[11];
+    
     clue1.textContent = clues[0];
     clue2.textContent = clues[1];
     clue3.textContent = clues[2];
+
     logicQuestion.textContent = question;
 }
+
 for (let i of cleaned_grid) {
     i.addEventListener('click', () => {
-        if (i.innerHTML  != '<img src="../assets/Yellow_x.png" width="54px" height="54px">') {
+        if (i.innerHTML  == '') {
+            i.innerHTML  = '<img src="../assets/Yellow_x.png" width="54px" height="54px">';
+            fillCount++;
+        } else if (i.innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
             i.innerHTML  = '<img src="../assets/Yellow_x.png" width="54px" height="54px">';
         } else {
             i.innerHTML = '';
+            fillCount--;
+        }
+        if (fillCount >= 27) {
+            checkGrid();
         }
     })
     i.addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        if (i.innerHTML != '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+        if (i.innerHTML == '') {
+            i.innerHTML = '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">';
+            fillCount++;
+        } else if (i.innerHTML == '<img src="../assets/Yellow_x.png" width="54px" height="54px">') {
             i.innerHTML = '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">';
         } else {
             i.innerHTML = '';
+            fillCount--;
         }
-    })}  
+        if (fillCount >= 27) {
+            checkGrid();
+        }
+    })
+}
+
+function checkGrid() {
+    if(cleaned_grid[1].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[4].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[6].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[9].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[14].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[17].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[18].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && cleaned_grid[22].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">' && 
+    cleaned_grid[26].innerHTML == '<img src="../assets/600px-Yellow_check.png" width="50px" height="50px">') {
+        console.log("Correct!");
+    } else {
+        console.log("Incorrect!");
+    }
+}
