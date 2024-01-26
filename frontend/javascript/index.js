@@ -60,5 +60,9 @@ async function getProfile (){
   ww2Score.textContent = profile.ww2
   medicineScore.textContent = profile.medicine
   liveNumber.textContent = profile.lives
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> rahma

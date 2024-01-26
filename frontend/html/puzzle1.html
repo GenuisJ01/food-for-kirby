@@ -33,24 +33,33 @@
                         <div class="modal-title">Question?...</div>
                     </div>
                     <div class="modal-body" id="multi-choice-container">
-                        <div id="answer-list" ondrop="drop(event)" ondragover="allowDrop(event)">
-                          <p>Drag and drop the events to arrange them in chronological order:</p>
-                        </div>
-                        <div id="choice1" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 1: Discovery of America in 1492">Event 1: Discovery of America in 1492</div>
-                        <div id="choice2" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 2: French Revolution in 1789">Event 2: French Revolution in 1789</div>
-                        <div id="choice3" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 3: World War II in 1939">Event 3: World War II in 1939</div>
-                        <div id="choice4" class="multi-choice-answers" draggable="true" ondragstart="drag(event)" data-answer="Event 4: Moon Landing in 1969">Event 4: Moon Landing in 1969</div>
-
-                    </div>
+                      <p id="multi-choice-help">Drag and drop the events to arrange them in chronological order:</p>
+                      <ul id="sortable-list">
+                        <li class="multi-choice-answers" id="choice1">Answer 1</li>
+                        <li class="multi-choice-answers" id="choice2">Answer 2</li>
+                        <li class="multi-choice-answers" id="choice3">Answer 3</li>
+                      </ul>
+                      <br>
+                      <button id="submit">Submit</button>
+                  </div>
+                  <div id="correct-reasons">
+                  <p id="reason-message"></p>
+                  <ul id="reason-list">
+                      <li id="reason1"></li>
+                      <li id="reason2"></li>
+                      <li id="reason3"></li>
+                  </ul>
+                  </div>
                 </div>
                 <dialog id="popup">
-                  <p>Congrats! You're 100% correct</p>
+                  <p id="popupMessage">Congrats! You're 100% correct</p>
                   <button id="closePopup">Close</button>
-                </dialog>
+                </dialog>             
                 <dialog id="popup-half">
-                  <p>Good job, You're half correct</p>
-                  <button id="closePopup-half">Close</button>
-                </dialog>
+                    <p id="popupHalfMessage">Good job, You're half correct</p>
+                    <button id="tryAgainButton">Try Again</button>
+                    <button id="revealAnswerButton">Reveal Answer</button>
+                </dialog>       
             </div>
         </div>
         <div id="overlay"></div>
@@ -115,12 +124,11 @@
             id="sitting-kirby"
           />
         </div>
-        <div id="clues-box">
-          <div class="clue" id="clue-box-title">clues</div>
-          <div id="clue1" class="clue">The first clue....</div>
-          <div id="clue2" class="clue">The second clue....</div>
-          <div id="clue3" class="clue">The third clue....</div>
-          <div id="clue4" class="clue">The fourth clue....</div>
+        <div id="exerpts-box">
+          <div class="exerpt" id="exerpts-box-title">exerpts</div>
+          <div id="exerpt1" class="exerpt">The first exerpt....</div>
+          <div id="exerpt2" class="exerpt">The second exerpt....</div>
+          <div id="exerpt3" class="exerpt">The third exerpt....</div>
         </div>
       </div>
       
